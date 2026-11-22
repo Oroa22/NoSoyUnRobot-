@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No soy un robot | Muro Digital Educomunicativo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron (Robótico/Tecnológico), Space Grotesk (Tech UI), JetBrains Mono (Algoritmo), Caveat (Manuscrito/Mano) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'JetBrains Mono', 'sans-serif'],
+                        serif: ['Orbitron', 'JetBrains Mono', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        paper: {
+                            bg: '#F4F0E6',
+                            card: '#FCFBF7',
+                            border: '#DFD8C8',
+                            ink: '#000000',
+                            muted: '#6B7280',
+                            crimson: '#B91C1C',
+                            amber: '#B45309'
+                        },
+                        abyss: {
+                            bg: '#0B0D11',
+                            card: '#141821',
+                            border: '#262C3A',
+                            light: '#EF4444',
+                            muted: '#FFFFFF',
+                            glow: '#F59E0B',
+                            cyan: '#38BDF8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Texturas táctiles y efectos de claroscuro */
+        :root {
+            --mouse-x: 50vw;
+            --mouse-y: 50vh;
+        }
+
+        /* Escala tipográfica robótica y tecnológica */
+        html {
+            font-size: 16.5px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'JetBrains Mono', sans-serif;
+        }
+
+        h1, h2, h3, h4, .tech-title {
+            font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+            letter-spacing: 0.025em;
+        }
+
+        .tech-subtitle {
+            font-family: 'Space Grotesk', 'JetBrains Mono', sans-serif;
+            letter-spacing: 0.015em;
+        }
+
+        /* Modo Claro (Modo Papel de Archivo):
+           - Títulos y subtítulos: negro (#000000) y en negrilla
+           - Párrafos: gris claro (#6B7280) */
+        html.light body {
+            background-color: #F4F0E6;
+            background-image: 
+                radial-gradient(#D6CEBE 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(185, 28, 28, 0.04) 1px, transparent 1px);
+            background-size: 24px 24px, 100% 32px;
+            color: #000000;
+        }
+
+        html.light h1,
+        html.light h2,
+        html.light h3,
+        html.light h4,
+        html.light .tech-title,
+        html.light .tech-subtitle {
+            color: #000000 !important;
+            font-weight: 700 !important;
+        }
+
+        html.light p,
+        html.light .tech-paragraph {
+            color: #6B7280 !important;
+            font-weight: 400;
+        }
+
+        /* Modo Oscuro (Modo Oscuridad Crítica):
+           - Títulos y subtítulos: rojo (#EF4444) y en negrilla
+           - Párrafos: blanco (#FFFFFF) y en negrilla */
+        html.dark body {
+            background-color: #0B0D11;
+            background-image: 
+                radial-gradient(650px circle at var(--mouse-x) var(--mouse-y), rgba(245, 158, 11, 0.09), transparent 70%),
+                radial-gradient(#1E2433 1px, transparent 1px);
+            background-size: 100% 100%, 28px 28px;
+            color: #FFFFFF;
+        }
+
+        html.dark h1,
+        html.dark h2,
+        html.dark h3,
+        html.dark h4,
+        html.dark .tech-title,
+        html.dark .tech-subtitle {
+            color: #EF4444 !important;
+            font-weight: 700 !important;
+        }
+
+        html.dark p,
+        html.dark .tech-paragraph {
+            color: #FFFFFF !important;
+            font-weight: 700 !important;
+        }
+
+        /* Scrollbars estilizados para el tablero tipo Padlet */
+        .padlet-board::-webkit-scrollbar {
+            height: 10px;
+        }
+        .padlet-board::-webkit-scrollbar-track {
+            background: rgba(120, 113, 108, 0.1);
+            border-radius: 9999px;
+        }
+        .padlet-board::-webkit-scrollbar-thumb {
+            background: rgba(120, 113, 108, 0.35);
+            border-radius: 9999px;
+        }
+        .padlet-board::-webkit-scrollbar-thumb:hover {
+            background: rgba(180, 83, 9, 0.6);
+        }
+
+        .column-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .column-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .column-scroll::-webkit-scrollbar-thumb {
+            background: rgba(120, 113, 108, 0.25);
+            border-radius: 9999px;
+        }
+
+        /* Efecto de relieve táctil y sombra de la mano */
+        .tactile-card {
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        html.light .tactile-card {
+            box-shadow: 0 3px 10px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.08);
+        }
+        html.light .tactile-card:hover {
+            transform: translateY(-3px) rotate(-0.3deg);
+            box-shadow: 0 12px 24px rgba(28, 25, 23, 0.12), 0 4px 8px rgba(185, 28, 28, 0.08);
+        }
+        html.dark .tactile-card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        }
+        html.dark .tactile-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(245, 158, 11, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.35);
+        }
+
+        /* Imagen de fondo: Hombre de Vitruvio (Leonardo da Vinci) integrada al claroscuro */
+        html.light .vitruvian-bg-img {
+            opacity: 0.24;
+            mix-blend-mode: multiply;
+            filter: sepia(0.25) contrast(1.08);
+        }
+        html.dark .vitruvian-bg-img {
+            opacity: 0.22;
+            mix-blend-mode: screen;
+            filter: invert(0.9) sepia(0.45) hue-rotate(345deg) contrast(1.15);
+        }
+        html.dark .thematic-bg-spotlight {
+            background: radial-gradient(520px circle at var(--mouse-x) var(--mouse-y), rgba(245, 158, 11, 0.16), transparent 72%);
+        }
+
+        /* Imagen decorativa de fondo en la parte superior derecha */
+        html.light .top-right-bg-img {
+            opacity: 0.34;
+            mix-blend-mode: multiply;
+        }
+        html.dark .top-right-bg-img {
+            opacity: 0.28;
+            mix-blend-mode: luminosity;
+        }
+
+        /* Imagen decorativa de fondo en la parte inferior izquierda */
+        html.light .bottom-left-bg-img {
+            opacity: 0.72;
+            mix-blend-mode: normal;
+        }
+        html.dark .bottom-left-bg-img {
+            opacity: 0.62;
+            mix-blend-mode: normal;
+        }
+
+        /* Cinta adhesiva estética tipo nota de archivo */
+        .tape-strip {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1.5deg);
+            width: 64px;
+            height: 16px;
+            background: rgba(217, 119, 6, 0.22);
+            border-left: 1px dashed rgba(180, 83, 9, 0.3);
+            border-right: 1px dashed rgba(180, 83, 9, 0.3);
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+        html.dark .tape-strip {
+            background: rgba(245, 158, 11, 0.18);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col transition-colors duration-500 selection:bg-amber-500/30">
+
+    <!-- IMAGEN DE FONDO: EL HOMBRE DE VITRUVIO (LEONARDO DA VINCI) -->
+    <div id="thematicBackground" aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none flex items-center justify-center">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vitruvian_Man_by_Leonardo_da_Vinci.jpg"
+             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/2/22/Da_Vinci_Vitruve_Luc_Viatour.jpg';"
+             alt="El Hombre de Vitruvio de Leonardo da Vinci"
+             class="vitruvian-bg-img w-full h-full object-contain object-center transition-all duration-500 scale-105">
+
+        <!-- Imagen ajustada y visible en la esquina inferior izquierda sin alterar los recuadros -->
+        <div class="absolute bottom-7 left-0 w-[250px] sm:w-[340px] lg:w-[420px] h-[200px] sm:h-[260px] lg:h-[320px] overflow-hidden rounded-tr-2xl">
+            <img src="https://lh3.google.com/u/0/d/1kD7ZT0lbtSUs6ly9GTF_-4IqSL9f592x=w1920-h826-iv1?auditContext=prefetch"
+                 onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://lh3.googleusercontent.com/d/1kD7ZT0lbtSUs6ly9GTF_-4IqSL9f592x=w1920-h826';}else if(this.dataset.fallback==='1'){this.dataset.fallback='2';this.src='https://drive.google.com/thumbnail?id=1kD7ZT0lbtSUs6ly9GTF_-4IqSL9f592x&sz=w1920';}else{this.style.display='none';}"
+                 alt=""
+                 class="bottom-left-bg-img w-full h-full object-contain object-left-bottom transition-all duration-500">
+            <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-paper-bg/70 to-transparent dark:from-abyss-bg/75 dark:to-transparent"></div>
+            <div class="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-paper-bg/70 to-transparent dark:from-abyss-bg/75 dark:to-transparent"></div>
+        </div>
+
+        <!-- Capa de linterna en modo oscuridad crítica -->
+        <div class="hidden dark:block fixed inset-0 thematic-bg-spotlight"></div>
+    </div>
+
+    <!-- BARRA SUPERIOR TIPO PADLET / SIMPOSIO DE MAESTRÍA -->
+    <header class="sticky top-0 z-30 overflow-hidden backdrop-blur-md bg-paper-card/85 dark:bg-abyss-card/85 border-b border-paper-border dark:border-abyss-border transition-colors duration-500">
+        <!-- Imagen de fondo en la parte superior derecha (ajustada para no alterar el título ni los módulos) -->
+        <div aria-hidden="true" class="pointer-events-none select-none absolute top-0 right-0 h-full w-full sm:w-[65%] lg:w-[54%] overflow-hidden z-0">
+            <img src="https://lh3.google.com/u/0/d/1aYfLR-DtTBAVJaMSEWXu9zQCIYS4EOVJ=w1920-h826-iv1?auditContext=prefetch"
+                 onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://lh3.googleusercontent.com/d/1aYfLR-DtTBAVJaMSEWXu9zQCIYS4EOVJ=w1920-h826';}else if(this.dataset.fallback==='1'){this.dataset.fallback='2';this.src='https://drive.google.com/thumbnail?id=1aYfLR-DtTBAVJaMSEWXu9zQCIYS4EOVJ&sz=w1920';}else{this.style.display='none';}"
+                 alt=""
+                 class="top-right-bg-img w-full h-full object-cover object-right-top transition-all duration-500">
+            <div class="absolute inset-0 bg-gradient-to-r from-paper-card via-paper-card/65 to-transparent dark:from-abyss-card dark:via-abyss-card/70 dark:to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-[1650px] mx-auto px-4 sm:px-6 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                
+                <!-- Identidad del Proyecto -->
+                <div class="flex items-start sm:items-center gap-3">
+                    <div id="humanBadge" onclick="toggleHumanVerification()" role="button" tabindex="0" title="Haz clic para verificar tu condición humana"
+                         class="cursor-pointer shrink-0 flex items-center gap-2.5 px-3 py-2 rounded-xl border-2 border-paper-ink/20 dark:border-abyss-glow/40 bg-paper-bg dark:bg-abyss-bg hover:border-paper-crimson dark:hover:border-abyss-glow transition-all select-none shadow-sm">
+                        <div id="captchaBox" class="w-5 h-5 rounded flex items-center justify-center border-2 border-paper-crimson dark:border-abyss-glow bg-paper-crimson/10 dark:bg-abyss-glow/10 text-paper-crimson dark:text-abyss-glow font-bold text-xs">
+                            ✓
+                        </div>
+                        <div class="leading-tight">
+                            <span class="block font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-abyss-muted">CAPTCHA Crítico</span>
+                            <span id="captchaLabel" class="font-mono text-xs font-semibold text-paper-ink dark:text-abyss-light">No soy un robot</span>
+                        </div>
+                        <!-- Emblema visual de referencia reCAPTCHA ("No soy un robot") -->
+                        <div class="flex flex-col items-center justify-center pl-2 ml-0.5 border-l border-paper-border/80 dark:border-abyss-border/80" aria-hidden="true">
+                            <svg viewBox="0 0 36 36" class="w-6 h-6">
+                                <g transform="rotate(0 18 18)">
+                                    <path d="M 10.58 10.58 A 10.5 10.5 0 0 1 26.90 12.44" fill="none" stroke="#1C3AA9" stroke-width="3.2" class="dark:stroke-sky-400"/>
+                                    <polygon points="28.09,15.10 29.44,10.28 23.97,13.97" fill="#1C3AA9" class="dark:fill-sky-400"/>
+                                </g>
+                                <g transform="rotate(120 18 18)">
+                                    <path d="M 10.58 10.58 A 10.5 10.5 0 0 1 26.90 12.44" fill="none" stroke="#4285F4" stroke-width="3.2" class="dark:stroke-blue-400"/>
+                                    <polygon points="28.09,15.10 29.44,10.28 23.97,13.97" fill="#4285F4" class="dark:fill-blue-400"/>
+                                </g>
+                                <g transform="rotate(240 18 18)">
+                                    <path d="M 10.58 10.58 A 10.5 10.5 0 0 1 26.90 12.44" fill="none" stroke="#9CA3AF" stroke-width="3.2" class="dark:stroke-amber-400"/>
+                                    <polygon points="28.09,15.10 29.44,10.28 23.97,13.97" fill="#9CA3AF" class="dark:fill-amber-400"/>
+                                </g>
+                            </svg>
+                            <span class="font-sans text-[7px] font-semibold tracking-tight text-paper-muted dark:text-abyss-muted leading-none mt-0.5">reCAPTCHA</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2 py-0.5 text-[11px] font-mono uppercase tracking-wider rounded-full bg-paper-crimson/10 text-paper-crimson dark:bg-abyss-glow/15 dark:text-abyss-glow font-semibold">
+                                Simposio Maestría en Comunicación y Educación
+                            </span>
+                            <span class="tech-subtitle hidden sm:inline-block text-xs sm:text-sm font-bold">
+                                • Sistema de la Mano vs. Sistema del Celular
+                            </span>
+                        </div>
+                        <h1 class="font-serif text-lg sm:text-xl md:text-2xl font-bold tracking-tight mt-0.5">
+                            No soy un robot: Elogio de la mano y la memoria en tiempos hiperconectados
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Controles Interactivos del Muro -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <!-- Interruptor Claroscuro (Speranza: Luz y Oscuridad) -->
+                    <button id="themeToggle" onclick="toggleTheme()" 
+                            class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-paper-border dark:border-abyss-border bg-paper-bg dark:bg-abyss-bg hover:border-paper-amber dark:hover:border-abyss-glow transition-all shadow-sm">
+                        <span id="themeIcon" class="text-base">🌑</span>
+                        <span id="themeText">Modo Oscuridad Crítica</span>
+                    </button>
+
+                    <!-- Botón Ir directo al ejercicio manual en 4.ª Persona (Columna 4) -->
+                    <button onclick="scrollToFourthColumn()" 
+                            class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-paper-crimson/30 dark:border-abyss-cyan/40 bg-paper-crimson/10 dark:bg-abyss-cyan/10 text-paper-crimson dark:text-abyss-cyan hover:bg-paper-crimson/20 dark:hover:bg-abyss-cyan/20 transition-all">
+                        <span>✍️🌐</span>
+                        <span>Crear en 4.ª Persona</span>
+                    </button>
+
+                    <!-- Botón Añadir Ventana al Muro -->
+                    <button onclick="openAddModal('col1')" 
+                            class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-paper-ink text-paper-card dark:bg-abyss-glow dark:text-abyss-bg hover:opacity-90 transition-all shadow-sm">
+                        <span>+</span>
+                        <span>Nueva Ventana</span>
+                    </button>
+
+                    <!-- Botón Guía de Sustentación / Bibliografía APA 7 -->
+                    <button onclick="openBiblioModal()" 
+                            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-paper-border dark:border-abyss-border bg-paper-card dark:bg-abyss-card hover:bg-paper-bg dark:hover:bg-abyss-bg transition-all"
+                            title="Ver síntesis teórica y referencias APA 7">
+                        <span>📚</span>
+                        <span class="hidden sm:inline">Fuentes APA 7</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra de Navegación por Columnas -->
+            <div class="mt-3 pt-2.5 border-t border-paper-border/60 dark:border-abyss-border/60 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-mono text-[11px] text-paper-muted dark:text-abyss-muted mr-1">Vista del Muro:</span>
+                    <button onclick="filterColumns('all')" data-colfilter="all" class="col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg transition-all">
+                        Todas las Columnas (4)
+                    </button>
+                    <button onclick="filterColumns('col1')" data-colfilter="col1" class="col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted hover:text-paper-ink dark:hover:text-white border border-paper-border dark:border-abyss-border transition-all">
+                        1. Categorías de Análisis (4)
+                    </button>
+                    <button onclick="filterColumns('col2')" data-colfilter="col2" class="col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted hover:text-paper-ink dark:hover:text-white border border-paper-border dark:border-abyss-border transition-all">
+                        2. Contexto Educativo (4)
+                    </button>
+                    <button onclick="filterColumns('col3')" data-colfilter="col3" class="col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted hover:text-paper-ink dark:hover:text-white border border-paper-border dark:border-abyss-border transition-all">
+                        3. Lo que vemos (4)
+                    </button>
+                    <button onclick="filterColumns('col4')" data-colfilter="col4" class="col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted hover:text-paper-ink dark:hover:text-white border border-paper-border dark:border-abyss-border transition-all">
+                        4. Lo que podemos ver (3)
+                    </button>
+                </div>
+
+                <div class="font-hand text-base sm:text-lg text-paper-crimson dark:text-abyss-glow">
+                    «El hombre piensa porque tiene manos» — Anaxágoras / Villoro (2024)
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DEL MURO PADLET (4 COLUMNAS HORIZONTALES) -->
+    <main id="padletBoardMain" class="relative z-10 flex-1 overflow-x-auto padlet-board px-4 sm:px-6 py-6">
+        <div id="boardColumns" class="flex items-start gap-6 min-w-max pb-6">
+            <!-- Las 4 columnas se renderizan dinámicamente desde JavaScript -->
+        </div>
+    </main>
+
+    <!-- SECCIÓN PÚBLICA FINAL: TODOS LOS COMENTARIOS, PREGUNTAS, OBSERVACIONES, RETROALIMENTACIONES Y DIBUJOS EN 4.ª PERSONA -->
+    <section id="publicSymposiumSection" aria-label="Bitácora Pública del Simposio" class="relative z-10 max-w-[1650px] w-full mx-auto px-4 sm:px-6 pb-8">
+        <div class="rounded-2xl bg-paper-card/85 dark:bg-abyss-card/85 border-2 border-paper-border dark:border-abyss-border backdrop-blur-md p-5 sm:p-6 shadow-lg transition-colors duration-500">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-4 border-b border-paper-border/80 dark:border-abyss-border/80">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="px-2.5 py-0.5 text-[11px] font-mono uppercase tracking-wider rounded-full bg-paper-crimson/15 text-paper-crimson dark:bg-abyss-glow/20 dark:text-abyss-glow font-bold">
+                            🌐 Muro Público del Simposio • Acceso Abierto
+                        </span>
+                        <span id="publicTotalStats" class="font-mono text-xs text-paper-muted dark:text-abyss-muted">
+                            0 aportes públicos • 0 creaciones en 4.ª persona
+                        </span>
+                    </div>
+                    <h2 class="font-serif text-lg sm:text-xl font-bold">
+                        Participación pública: Comentarios, preguntas, observaciones, retroalimentaciones y creaciones en 4.ª persona
+                    </h2>
+                    <p class="tech-paragraph text-xs sm:text-sm mt-1">
+                        Aquí se reúnen y exhiben públicamente todas las intervenciones registradas en las ventanas de las 4 columnas, junto con los relatos manuscritos y dibujos trazados por los participantes.
+                    </p>
+                </div>
+
+                <!-- Filtros públicos por tipo de participación -->
+                <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                    <button type="button" onclick="setPublicFeedFilter('all')" data-pubfilter="all"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono font-bold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg transition-all">
+                        Todos
+                    </button>
+                    <button type="button" onclick="setPublicFeedFilter('Comentario')" data-pubfilter="Comentario"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all">
+                        💬 Comentarios
+                    </button>
+                    <button type="button" onclick="setPublicFeedFilter('Pregunta')" data-pubfilter="Pregunta"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all">
+                        ❓ Preguntas
+                    </button>
+                    <button type="button" onclick="setPublicFeedFilter('Observación')" data-pubfilter="Observación"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all">
+                        👁️ Observaciones
+                    </button>
+                    <button type="button" onclick="setPublicFeedFilter('Retroalimentación')" data-pubfilter="Retroalimentación"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all">
+                        🔄 Retroalimentaciones
+                    </button>
+                    <button type="button" onclick="setPublicFeedFilter('Creaciones4P')" data-pubfilter="Creaciones4P"
+                            class="pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all">
+                        ✍️ Escritos / Dibujos 4.ª P.
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenedor dinámico del muro público -->
+            <div id="publicSymposiumFeed" class="mt-5 space-y-6">
+                <!-- Renderizado dinámico con todos los aportes públicos y creaciones en 4.ª persona -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA ACADÉMICO -->
+    <footer class="relative z-10 border-t border-paper-border dark:border-abyss-border bg-paper-card/70 dark:bg-abyss-card/70 py-3 px-4 sm:px-6 text-xs">
+        <div class="max-w-[1650px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p class="tech-paragraph">
+                <strong>Autor: Felipe Roa</strong> • Universidad Distrital Francisco José de Caldas. Maestría en Comunicación/Educación. II semestre. 2026.
+            </p>
+            <p class="tech-paragraph font-mono text-[11px]">
+                Fuentes APA 7: Speranza (2022) &amp; Villoro (2024) • Participa en la Columna 4 trazando con tu dedo o mouse.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: VISTA DETALLADA DE VENTANA (FICHA TEÓRICA + COMENTARIOS PADLET) -->
+    <div id="detailModal" onclick="if(event.target === this) closeModal('detailModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm p-4">
+        <div class="bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button type="button" onclick="closeModal('detailModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-paper-bg dark:bg-abyss-bg text-paper-muted hover:text-paper-ink dark:hover:text-white">✕</button>
+            
+            <div id="modalTag" class="inline-block font-mono text-xs uppercase px-2.5 py-1 rounded-full mb-2"></div>
+            <h3 id="modalTitle" class="font-serif text-2xl font-bold text-paper-ink dark:text-abyss-light mb-3"></h3>
+            
+            <div id="modalVisualContainer" class="mb-4 rounded-xl overflow-hidden border border-paper-border dark:border-abyss-border"></div>
+            
+            <div id="modalBody" class="space-y-3 text-sm leading-relaxed text-paper-ink dark:text-gray-200"></div>
+            
+            <div id="modalQuoteBox" class="mt-4 p-4 rounded-xl bg-paper-bg dark:bg-abyss-bg border-l-4 border-paper-crimson dark:border-abyss-glow italic text-sm"></div>
+
+            <!-- Sección de Comentarios estilo Padlet -->
+            <div class="mt-6 pt-4 border-t border-paper-border dark:border-abyss-border">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-paper-muted dark:text-abyss-muted">
+                        💬 Aportes y anotaciones del Simposio (<span id="commentCount">0</span>)
+                    </h4>
+                    <span class="font-mono text-[10px] text-paper-muted dark:text-abyss-muted">Se guarda automáticamente en el muro</span>
+                </div>
+                <div id="modalCommentsList" class="space-y-2 mb-3 max-h-44 overflow-y-auto pr-1"></div>
+                <form id="commentForm" onsubmit="submitComment(event)" class="space-y-2">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="commentAuthorInput" type="text" placeholder="Autor / Rol (Ej. Jurado, Ponente)"
+                               class="sm:flex-1 px-3 py-2 text-xs rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                        <select id="commentCategoryInput" aria-label="Tipo de aporte"
+                                class="sm:w-48 px-3 py-2 text-xs rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                            <option value="Comentario">💬 Comentario</option>
+                            <option value="Pregunta">❓ Pregunta</option>
+                            <option value="Observación">👁️ Observación</option>
+                            <option value="Retroalimentación">🔄 Retroalimentación</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-1 gap-2">
+                        <input id="commentInput" type="text" required placeholder="Escribe un comentario, pregunta, observación o retroalimentación..."
+                               class="flex-1 px-3 py-2 text-xs rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                        <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg hover:opacity-90 transition-all shrink-0">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: AÑADIR NUEVA VENTANA AL MURO PADLET -->
+    <div id="addModal" onclick="if(event.target === this) closeModal('addModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm p-4">
+        <div class="bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border rounded-2xl max-w-lg w-full shadow-2xl p-6 relative">
+            <button type="button" onclick="closeModal('addModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-paper-bg dark:bg-abyss-bg text-paper-muted hover:text-paper-ink dark:hover:text-white">✕</button>
+            
+            <h3 class="font-serif text-xl font-bold text-paper-ink dark:text-abyss-light mb-1">Añadir ventana al muro Padlet</h3>
+            <p class="text-xs text-paper-muted dark:text-abyss-muted mb-4">Incorpora una nueva reflexión teórica, caso educativo o ejemplo comparado.</p>
+
+            <form onsubmit="handleAddCard(event)" class="space-y-3.5 text-sm">
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Columna de destino</label>
+                    <select id="newCardCol" class="w-full px-3 py-2 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white text-xs">
+                        <option value="col1">1. Memoria, interpretación y resistencia frente a la inmediatez y la posverdad. Fundamentación teórica</option>
+                        <option value="col2">2. Análisis desde el contexto educativo</option>
+                        <option value="col3">3. Lo que vemos</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Tipo de aporte</label>
+                    <select id="newCardType" class="w-full px-3 py-2 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white text-xs">
+                        <option value="teoria">📖 Categoría y Cita Teórica</option>
+                        <option value="educacion">🎓 Reflexión Educativa Colombia</option>
+                        <option value="caso">🌍 Ejemplo Internacional / Local</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Título de la ventana</label>
+                    <input id="newCardTitle" type="text" required placeholder="Ej. La escritura manuscrita en seminarios universitarios..."
+                           class="w-full px-3 py-2 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 text-xs">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Desarrollo conceptual e interpretación</label>
+                    <textarea id="newCardDesc" rows="3" required placeholder="Describe el análisis y su relación con las categorías de la propuesta..."
+                              class="w-full px-3 py-2 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 text-xs"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Cita textual directa en APA 7 (Opcional)</label>
+                    <input id="newCardQuote" type="text" placeholder="Ej. «...» (Villoro, 2024, cap. II)."
+                           class="w-full px-3 py-2 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 text-xs">
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeModal('addModal')" class="px-4 py-2 rounded-xl text-xs border border-paper-border dark:border-abyss-border">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-paper-crimson text-white dark:bg-abyss-glow dark:text-abyss-bg">Publicar en el Muro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: REFERENCIAS BIBLIOGRÁFICAS APA 7 Y SÍNTESIS TEÓRICA -->
+    <div id="biblioModal" onclick="if(event.target === this) closeModal('biblioModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm p-4">
+        <div class="bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button type="button" onclick="closeModal('biblioModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-paper-bg dark:bg-abyss-bg text-paper-muted hover:text-paper-ink dark:hover:text-white">✕</button>
+            
+            <span class="tech-subtitle font-mono text-xs uppercase font-bold">Fundamentación del Simposio</span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold mt-1 mb-4">Referencias Bibliográficas (APA 7)</h3>
+
+            <div class="space-y-4 text-sm leading-relaxed">
+                <div class="p-4 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border">
+                    <h4 class="font-bold text-paper-crimson dark:text-abyss-glow mb-1">1. Speranza, G. (2022). <em>Lo que no vemos, lo que el arte ve</em>. Editorial Anagrama.</h4>
+                    <p class="text-xs text-paper-muted dark:text-abyss-muted">
+                        Fundamenta el análisis del capitalismo de vigilancia (Shoshana Zuboff), la automatización de la visión que excluye al ojo humano, la actividad de «percibir en la oscuridad» (Giorgio Agamben), el «narrador en cuarta persona» y la «ternura» ecocéntrica de Olga Tokarczuk frente al narcisismo digital, la reconstrucción contraforense de lo real (Hal Foster, Thomas Demand, Forensic Architecture / Paulo Tavares) y el «compostaje» simpoiético (Donna Haraway).
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border">
+                    <h4 class="font-bold text-paper-crimson dark:text-abyss-glow mb-1">2. Villoro, J. (2024). <em>No soy un robot: La lectura y la sociedad digital</em>. Editorial Anagrama.</h4>
+                    <p class="text-xs text-paper-muted dark:text-abyss-muted">
+                        Sustenta la crítica a la velocidad binaria y las «migas de pan» de los algoritmos, el «populismo tecnológico» de la lectura rápida y salteada (Beatriz Sarlo), la reducción táctil al índice y el pulgar en la <em>touch screen</em>, el <em>Elogio de la mano</em> (Henri Focillon y Hernán Bravo Varela) como recorrido cognitivo y sensorial irreductible a la máquina, la <em>Gestalt</em> y el «blanco activo» (Jacques Rancière), y el rescate poético del lenguaje situado en Colombia (<em>Casa de las estrellas</em> de Javier Naranjo).
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <button type="button" onclick="resetBoardData()" class="text-xs text-paper-muted hover:text-paper-crimson underline">
+                        Restaurar estructura original del muro
+                    </button>
+                    <button type="button" onclick="closeModal('biblioModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg">
+                        Volver al Muro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST (SIN ALERT) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-xl bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg text-xs font-medium shadow-lg transition-all"></div>
+
+    <script>
+        /**
+         * REORGANIZACIÓN ESTRUCTURAL EN 4 COLUMNAS Y 14 VENTANAS:
+         * - Columna 1 (4 ventanas): "Memoria, interpretación y resistencia frente a la inmediatez y la posverdad"
+         * - Columna 2 (4 ventanas): "Análisis desde el contexto educativo" (Bachillerato, Pregrado, Posgrado y Síntesis en Colombia)
+         * - Columna 3 (4 ventanas): "Lo que vemos" (Ejemplos internacionales y locales en Colombia + interpretación)
+         * - Columna 4 (2 ventanas): "Lo que podemos ver" (Video de desaceleración atencional + ejercicio de escritura manual / dibujo táctil sin teclado en 4.ª persona - Olga Tokarczuk)
+         */
+
+        const INITIAL_COLUMNS = [
+            {
+                id: 'col1',
+                number: '01',
+                title: 'Memoria, interpretación y resistencia frente a la inmediatez y la posverdad',
+                subtitle: 'Fundamentación teórica',
+                cards: [
+                    {
+                        id: 'c1-1',
+                        type: 'teoria',
+                        badge: '📖 Categoría 1 • Opacidad Algorítmica',
+                        title: 'Sistema del celular: Automatización de la visión y respuesta binaria',
+                        summary: 'Interpretación: El sistema del celular opera bajo la lógica del capitalismo de vigilancia (Zuboff). Su pantalla iluminada oculta una arquitectura opaca que excluye el juicio humano, entrena una lectura rápida y salteada («populismo tecnológico» de Sarlo) y sustituye la reflexión dilatada por el reflejo automático del scroll.',
+                        quote: '«A menudo no vemos a quienes nos miran en dispositivos cada vez más alarmantes de vigilancia y control, y son las máquinas las que producen imágenes para otras máquinas, en una automatización de la visión que excluye al ojo humano» (Speranza, 2022, Prólogo).',
+                        secondaryNote: 'Villoro (2024) precisa el efecto cognitivo de esta interfaz: «Los vertiginosos textos de las redes no requieren de una interpretación dilatada, sino de la respuesta exprés del pensamiento binario» (cap. II), dejando «migas de pan» para alimentar algoritmos de reiteración.',
+                        svgType: 'chiaroscuro',
+                        videoUrl: 'https://www.youtube.com/embed/WRJnVyqVGpc',
+                        videoWatchUrl: 'https://www.youtube.com/watch?v=WRJnVyqVGpc',
+                        likes: 24,
+                        comments: ['Contrasta directamente la falsa transparencia de la interfaz móvil con la opacidad algorítmica.']
+                    },
+                    {
+                        id: 'c1-2',
+                        type: 'teoria',
+                        badge: '✋ Categoría 2 • Resistencia Háptica',
+                        title: 'Sistema de la mano: Soberanía sensorial, memoria y duda',
+                        summary: 'Interpretación: Mientras el teléfono móvil atrofia la mano reduciéndola al toque sin fricción del índice y el pulgar, el sistema análogo de la mano (escribir a pulso, hojear, trazar) activa la memoria espacial, restaura el intervalo necesario para recapacitar («la duda») y devuelve al sujeto su huella física.',
+                        quote: '«El "factor humano" depende menos de nuestra habilidad intelectual que de un recorrido sensorial. La inteligencia artificial puede discernir entre una imagen y otra, pero, al menos por ahora, carece de una mano que se mueva como la nuestra» (Villoro, 2024, Introducción).',
+                        secondaryNote: 'Henri Focillon afirma: «Entre la mano y la herramienta comienza una amistad que no tendrá fin. La una comunica a la otra su calor de vida y la forma a perpetuidad» (citado en Villoro, 2024, cap. II). Y Bravo Varela añade: «Mano y tacto, como cuerpo y sombra, han ido por la tierra dándoles un fin a las cosas» (citado en Villoro, 2024, cap. II).',
+                        svgType: 'handShadow',
+                        imageUrl: 'https://www.clarin.com/img/2026/04/06/8Q5zeCtzL_1256x620__1.jpg',
+                        videoUrl: 'https://www.youtube.com/embed/37A4S9bim_U',
+                        videoWatchUrl: 'https://www.youtube.com/watch?v=37A4S9bim_U',
+                        likes: 29,
+                        comments: []
+                    },
+                    {
+                        id: 'c1-3',
+                        type: 'teoria',
+                        badge: '🌐 Categoría 3 • Cuarta Persona y Ternura',
+                        title: 'Del narcisismo del «Yo» digital a la «Cuarta Persona» de Olga Tokarczuk',
+                        summary: 'Interpretación: Las plataformas móviles confinan al usuario en una primera persona egoica y autorreferencial. Al articular el elogio de la mano con el «narrador en cuarta persona» y la «ternura» de Tokarczuk, la escritura pausada descentra al sujeto y le permite percibir los hilos invisibles que unen su vida con la comunidad y la naturaleza.',
+                        quote: '«Sueño con un nuevo tipo de narrador, una "cuarta persona" que no es simplemente una construcción gramatical, sino que logra abarcar la perspectiva de cada uno de los personajes, además de tener la capacidad de ir más allá del horizonte de cada uno de ellos, que ve más y tiene una visión más amplia» (Tokarczuk, citada en Speranza, 2022, cap. I).',
+                        secondaryNote: 'Tokarczuk define la «ternura» como «una forma de mirar que muestra al mundo como vivo, interconectado, cooperando y codependiente de sí mismo» (citada en Speranza, 2022, cap. I), superando la ficción antropocéntrica de estar separados del entorno.',
+                        svgType: 'fourthPerson',
+                        likes: 31,
+                        comments: ['Puente esencial entre la escritura manual y la sensibilidad ecológica y social.']
+                    },
+                    {
+                        id: 'c1-4',
+                        type: 'teoria',
+                        badge: '✋ Categoría 4 • Inteligencia de las Manos',
+                        title: 'La «inteligencia de las manos» y la dimensión sensorial del cuerpo',
+                        summary: 'El acto de leer, escribir y manipular herramientas involucra una relación física, táctil y rítmica entre el cuerpo y la materia que las máquinas no replican; allí reside parte de la singularidad humana y creativa.',
+                        quote: '«El “factor humano” depende menos de nuestra habilidad intelectual que de un recorrido sensorial. La inteligencia artificial puede discernir entre una imagen y otra, pero, al menos por ahora, carece de una mano que se mueva como la nuestra» (Villoro, 2024, pp. 79-80).',
+                        imageUrl: 'https://img.magnific.com/fotos-premium/mano-humana-mano-robotica-sosteniendo-lapiz_1229620-2523.jpg?semt=ais_hybrid&w=740&q=80',
+                        likes: 22,
+                        comments: []
+                    }
+                ]
+            },
+            {
+                id: 'col2',
+                number: '02',
+                title: 'Análisis desde el contexto educativo',
+                subtitle: 'Rescate del sistema análogo de la mano frente al sistema del celular en Colombia',
+                cards: [
+                    {
+                        id: 'c2-1',
+                        type: 'educacion',
+                        badge: '🏫 Bachillerato (Educación Media)',
+                        title: 'Del scroll impulsivo al cuaderno rayado y la crónica territorial.',
+                        summary: 'En el sistema educativo formal de Colombia, el celular recorta la motricidad fina y entrena respuestas reactivas ante videos de 15 segundos sobre conflictos sociales o ambientales. Rescatar el sistema de la mano —mediante diarios de campo manuscritos, recortes de prensa impresa y escritura en cinta bicolor (negro para hechos, rojo para dudas)— restituye el intervalo reflexivo para que los y las adolescentes nombren su territorio con voz propia.',
+                        quote: '«El sistema operativo del libro en papel no debe ser actualizado ni requiere de respaldo. Su tipografía es constante, pero su mensaje cambia con el tiempo y se presta a nuevas interpretaciones» (Villoro, 2024, cap. I).',
+                        secondaryNote: 'Aporte de la propuesta: En el aula secundaria colombiana, escribir a mano actúa como un filtro de desaceleración cognitiva y sensitiva que desarma la eficacia inmediata de las fake news.',
+                        imageUrl: 'https://unamglobal.unam.mx/wp-content/uploads/2025/10/destacada-escritura-a-mano-1024x605.jpg',
+                        linkBoxes: [
+                            {
+                                label: 'Artículo Divulgativo • UNAM Global',
+                                title: 'Escritura a mano, cerebro y aprendizaje — UNAM Global Revista',
+                                url: 'https://unamglobal.unam.mx/global_revista/escritura-a-mano-cerebro-aprendizaje-unam/'
+                            },
+                            {
+                                label: 'Recurso Oficial • Ministerio de Educación Nacional',
+                                title: 'Capítulo 6: La escritura como herramienta para descubrirnos a nosotros mismos',
+                                url: 'https://www.mineducacion.gov.co/portal/micrositios-institucionales/Educacion-para-la-vida/414653:Capitulo-6-La-escritura-como-herramienta-para-descubrirnos-a-nosotros-mismos'
+                            },
+                            {
+                                label: 'Cartilla Pedagógica PDF • Colombia Aprende',
+                                title: 'Prácticas de Escritura en el Aula — Plan Nacional de Lectura y Escritura',
+                                url: 'https://colombiaaprende.edu.co/sites/default/files/files_public/plan-lectura-2021/manuales-y-cartillas/Practicas_de_Escritura_en_el_Aula.pdf'
+                            }
+                        ],
+                        likes: 27,
+                        comments: ['En bachillerato es urgente recuperar el trazo manual antes de que el índice sustituya toda escritura.']
+                    },
+                    {
+                        id: 'c2-2',
+                        type: 'educacion',
+                        badge: '🎓 Pregrado Universitario',
+                        title: 'Contra el «copiar-pegar» digital: Ewscribir, tachar, anotar, dibujar.',
+                        summary: 'El consumo acelerado de resúmenes en pantallas móviles y textos generados automáticamente mutila los procesos motores y cognitivos de síntesis, borrando el «arrepentimiento» y la reescritura artesanal. Escribir, rayar o dibujar  se puede considerar como un “acto de poder” que puede tener colores, figuras, listas o dobleces. Alienta un diálogo personal, directo y profundo entre quien lee y el escritor.',
+                        quote: '«Los procesos digitales ahorran tiempo, algo estupendo para el editor que desea cenar a tiempo con su familia, pero la solución instantánea elimina reacciones tan decisivas como el arrepentimiento. Recapacitar toma tiempo» (Villoro, 2024, cap. II).',
+                        secondaryNote: 'Aporte de la propuesta: Al manipular físicamente recortes, tierra, papel y archivos locales para animar un cortometraje, el estudiante universitario recupera el juicio crítico frente a la fluidez automatizada de la máquina.',
+                        imageUrl: 'https://estaticos.elcolombiano.com/documents/10157/0/780x622/0c28/780d565/none/11101/BSHH/image_content_35581373_20200420182116.jpg',
+                        likes: 25,
+                        comments: []
+                    },
+                    {
+                        id: 'c2-3',
+                        type: 'educacion',
+                        badge: '🔬 Posgrado (Maestría y Especialización)',
+                        title: 'Epistemología encarnada y formación de «inadaptados digitales»',
+                        summary: 'El «inadaptado digital» es quien no se deja absorber por completo por la velocidad, la superficie de la pantalla ni la lógica automática de lo digital. En la perspectiva de Graciela Speranza —y en diálogo con la mirada crítica sobre la lectura y la tecnología—, esta categoría no significa rechazo tecnofóbico ni aislamiento ingenuo, sino una forma activa de desajuste perceptivo: detenerse, mirar en tres dimensiones, tocar la materia, sostener la memoria y buscar «volver a hacer real lo real» cuando todo empuja hacia lo instantáneo y lo virtual.',
+                        quote: '«Hay incluso inadaptados digitales que, sin renunciar a las herramientas cibernéticas, contrarían el frenesí de la web, renuevan sus medios y se renuevan con los estímulos creativos de sus fallos y sus imposibilidades» (Speranza, 2022, Prólogo).',
+                        secondaryNote: 'Aporte de la propuesta: La alfabetización mediática avanzada no consiste en un adiestramiento instrumental sumiso, sino en cultivar sujetos capaces de interrogar la opacidad algorítmica desde el cuerpo y la memoria.',
+                        imageUrl: 'https://share.gemini.google/FbnveGvScZ5S',
+                        likes: 30,
+                        comments: ['Sostiene el núcleo epistemológico de nuestra investigación en la Maestría.']
+                    },
+                    {
+                        id: 'c2-4',
+                        type: 'educacion',
+                        badge: '🎯 Objetivo Central de la Propuesta',
+                        title: 'Rescatar el sistema análogo para habitar críticamente el mundo de la vida',
+                        summary: 'El mundo digital amputa procesos neuro-motores y cognitivos indispensables para desarrollo cognitivo y físico del ser humano, en relación con su ámbiente inmediato, al apartar el cuerpo y reducir a una yema dactilar que desliza superficies planas sin resistencia.',
+                        quote: '«Sin necesidad de marcar una casilla, quien sabe leer afirma: "No soy un robot"» (Villoro, 2024, Introducción).',
+                        secondaryNote: 'Aporte de la propuesta: Reivindicar la mano, la sombra del cuerpo y la memoria viva convierte el aula colombiana en una trinchera ética y estética frente a la automatización del presente.',
+                        svgType: 'hybridLab',
+                        likes: 35,
+                        comments: []
+                    }
+                ]
+            },
+            {
+                id: 'col3',
+                number: '03',
+                title: 'Lo que vemos',
+                subtitle: 'Ejemplos internacionales y locales (Colombia) interpretados desde las categorías',
+                cards: [
+                    {
+                        id: 'c3-1',
+                        type: 'caso',
+                        badge: '🌍 Caso Internacional • Brasil / Londres',
+                        title: 'Forensic Architecture y las «Ruinas Vivas» de la Amazonía (Paulo Tavares)',
+                        summary: 'Ejemplo: El arquitecto brasileño Paulo Tavares y el colectivo internacional Forensic Architecture (citados en Speranza, 2022) cruzan archivos históricos, testimonios indígenas y análisis espacial para demostrar que dos círculos perfectos de vegetación en áreas deforestadas de la Amazonía son «ruinas arquitectónicas vivas» de antiguas aldeas Xavante.\n\nInterpretación: A la luz de la Reconstrucción de lo Real y la Estética Forense, este caso evidencia cómo la «ceguera óptica» de los mapas digitales borra la historia socioambiental. Al ensamblar pruebas materiales con la memoria de la Tierra, se logra «volver a hacer real lo real» frente al extractivismo.',
+                        quote: '«Esta "ceguera óptica" de la cartografía es en gran medida el correlato espacial de una "miopía epistemológica"... El pasado amerindio no solo persiste en la memoria del pueblo Xavante, sino también en la memoria de la Tierra y el tejido del bosque» (Tavares, citado en Speranza, 2022, cap. I).',
+                        svgType: 'reconstruction',
+                        linkBox: {
+                            label: 'Plataforma Contraforense de Libre Acceso',
+                            title: 'Forensic Architecture — Archivo de Investigaciones',
+                            url: 'https://forensic-architecture.org/'
+                        },
+                        likes: 26,
+                        comments: ['Conecta directamente la estética contraforense con la defensa de la selva amazónica.']
+                    },
+                    {
+                        id: 'c3-2',
+                        type: 'caso',
+                        badge: '🌍 Caso Internacional • Alemania',
+                        title: 'Maquetas de papel frente a la pantalla del celular (Thomas Demand)',
+                        summary: 'Ejemplo: En la serie The Dailies (analizada por Hal Foster en Speranza, 2022), el artista alemán Thomas Demand toma fotografías cotidianas con su teléfono celular (un jabón, un peine, broches de ropa) y las reconstruye minuciosamente a mano en maquetas tridimensionales de cartulina y papel para volver a fotografiarlas.\n\nInterpretación: Desde el Elogio de la Mano y la Resistencia Háptica, Demand rescata objetos trivializados por la pantalla plana y les devuelve volumen, peso y tacto. Demuestra que la mediación lenta de la mano desacelera la mirada y obliga a palpar el mundo tridimensional.',
+                        quote: '«No mire el mundo a través de la pantalla y vuelva a mirar las cosas en sus tres dimensiones, sus formas, sus colores. Tóquelas, huélalas, pálpelas» (Foster, citado en Speranza, 2022, cap. III).',
+                        imageUrl: 'https://www.c41magazine.com/wp-content/uploads/2023/03/Daily_No_2_Ascher-180dpi.jpg',
+                        imageCaption: 'Thomas Demand — Daily #2 (Serie The Dailies, 2012)',
+                        likes: 23,
+                        comments: []
+                    },
+                    {
+                        id: 'c3-3',
+                        type: 'caso',
+                        badge: '🇨🇴 Caso Local • Antioquia, Colombia',
+                        title: 'Casa de las estrellas (Javier Naranjo) y archivos manuscritos comunitarios',
+                        summary: 'Ejemplo: En Antioquia, el maestro colombiano Javier Naranjo recopiló definiciones escritas a mano por niños rurales y urbanos (Casa de las estrellas, citada en Villoro, 2024), quienes definen Mapa «Para encontrar cosas situadas» o Lenguaje como «Hablar con una persona sin gritarle». En paralelo, talleres de memoria barrial en Colombia transcriben a mano relatos de abuelos frente a cadenas virales de WhatsApp.\n\nInterpretación: A la luz del Compostaje Mediático y el Sistema de la Mano, la escritura manuscrita y situada de la niñez y juventud colombiana desarma los clichés binarios de internet, probando que la palabra escrita con pausa brota de la vivencia territorial.',
+                        quote: '«Mientras se aprenden, las palabras se reinventan. Los niños se adiestran simultáneamente en el lenguaje y en un metalenguaje de su creación» (Villoro, 2024, Epílogo).',
+                        imageUrl: 'https://yorokobu.b-cdn.net/wp-content/uploads/2013/05/Captura-de-pantalla-2013-05-24-a-las-02.11.35.png',
+                        secondaryImageUrl: 'https://yorokobu.b-cdn.net/wp-content/uploads/2013/05/1nino.jpg',
+                        likes: 33,
+                        comments: []
+                    },
+                    {
+                        id: 'c3-4',
+                        type: 'caso',
+                        badge: '🇨🇴 Caso Local • Páramos y Humedales de Colombia',
+                        title: 'Páramo de Santurbán y humedales urbanos ante la ceguera de pantalla',
+                        summary: 'Ejemplo: Frente a conflictos socioambientales como la defensa del Páramo de Santurbán o los humedales de la Sabana de Bogotá, en las redes sociales circulan memes polarizados y tendencias fugaces, mientras muchos jóvenes urbanos desconocen físicamente la cuenca hídrica que sostiene su propia vida cotidiana.\n\nInterpretación: Desde la Cuarta Persona y la Ternura de Olga Tokarczuk (Speranza, 2022), este fenómeno revela cómo el sistema del celular nos anestesia («mirando la pantalla para no ver al planeta morir»). Solo al caminar el ecosistema y escribir desde la perspectiva del agua y el campesino se reconocen los hilos invisibles de interdependencia.',
+                        quote: '«No estamos separados del resto del mundo por nuestra "humanidad", ni por ninguna excepcionalidad, sino que el mundo es en cambio una gran red en la que estamos enmarañados, conectados con otros seres por hilos invisibles de dependencia e influencia» (Tokarczuk, citada en Speranza, 2022, cap. I).',
+                        videoUrl: 'https://www.youtube.com/embed/ttfC6r5q2Uc',
+                        videoWatchUrl: 'https://www.youtube.com/watch?v=ttfC6r5q2Uc',
+                        likes: 31,
+                        comments: []
+                    }
+                ]
+            },
+            {
+                id: 'col4',
+                number: '04',
+                title: 'Lo que podemos ver',
+                subtitle: 'Laboratorio participativo en vivo: Escritura manual en 4.ª persona (Olga Tokarczuk)',
+                isInteractiveCreationColumn: true,
+                cards: [
+                    {
+                        id: 'c4-1',
+                        type: 'educacion',
+                        badge: '🎬 Apertura • Desaceleración Atencional',
+                        title: 'Cómo Vencer la Adicción al Scroll Infinito (Sin Fuerza de Voluntad)',
+                        summary: 'Antes de iniciar el ejercicio táctil en cuarta persona, este recurso audiovisual examina cómo romper la inercia del deslizamiento infinito rediseñando el entorno físico y recuperando la fricción consciente frente a la captura algorítmica de la atención.',
+                        videoUrl: 'https://www.youtube.com/embed/McfYGVLsPDo',
+                        videoWatchUrl: 'https://www.youtube.com/watch?v=McfYGVLsPDo',
+                        likes: 18,
+                        comments: []
+                    },
+                    {
+                        id: 'c4-2',
+                        type: 'teoria',
+                        badge: '✨ Cierre • Síntesis Educomunicativa',
+                        title: 'Volver sensible lo invisible',
+                        summary: 'Educar en el lenguaje y en la comunicación en pleno siglo XXI exige comprender que leer no es un acto pasivo de consumo ni una simple competencia técnica para aprobar pruebas: es una forma de habitar el mundo, de interrogar lo que parece obvio y de construir vínculos significativos. Tanto Graciela Speranza como Juan Villoro nos advierten que vivimos tiempos en los que lo urgente y lo espectacular tienden a ocultar lo profundo, lo frágil y lo que ocurre a escalas que exigen cuidado y demora. En un país como Colombia, donde la palabra, la memoria y el territorio están profundamente entrelazados, formar lectores y comunicadores críticos es también formar ciudadanos sensibles a las consecuencias de sus actos y de sus discursos.\n\nEn conclusión, el llamado es a habitar el universo digital con lucidez, criterio y medida, sin renunciar a la potencia formadora de «utilizar la mano». Usar la mano —al escribir, trazar, hojear, tocar la materia, cultivar o cuidar lo próximo— no es un gesto nostálgico ni un retroceso histórico: es el anclaje corporal y ético que impide que nuestra inteligencia se vuelva abstracta, mecánica o indiferente. Cuando unimos el discernimiento crítico frente a lo digital con el trabajo atento y sensible de la mano, desarrollamos una inteligencia más profunda, creativa y lúcida, y cultivamos una verdadera empatía con el mundo —con las personas, con las cosas y con la vida toda que compartimos en este planeta.',
+                        likes: 21,
+                        comments: []
+                    }
+                ]
+            }
+        ];
+
+        // Estado global de la aplicación
+        let columnsData = [];
+        let manualCreations = [];
+        let fourthPersonWindowComments = [];
+        let currentColFilter = 'all';
+        let currentPublicFilter = 'all';
+        let activeCardRef = null;
+        let humanVerified = true;
+        let rememberedSymposiumAuthor = '';
+        let selectedFourthPersonAuthor = 'Asistente Simposio';
+
+        // Estado del lienzo manuscrito táctil (Columna 4)
+        let handCanvas, handCtx;
+        let isDrawing = false;
+        let currentInk = '#1C1917';
+        let currentStrokeWidth = 2.6;
+        let hasDrawn = false;
+
+        // Inicialización
+        function initApp() {
+            try {
+                const savedCols = localStorage.getItem('padlet_nosoyunrobot_v3_cols');
+                if (savedCols) {
+                    const parsed = JSON.parse(savedCols);
+                    columnsData = Array.isArray(parsed) && parsed.length === INITIAL_COLUMNS.length
+                        ? parsed
+                        : JSON.parse(JSON.stringify(INITIAL_COLUMNS));
+                    const col1 = columnsData.find(c => c.id === 'col1');
+                    if (col1 && col1.title === 'Categorías de Análisis - Sistema de la mano Vs Sistema del celular') {
+                        col1.title = 'Memoria, interpretación y resistencia frente a la inmediatez y la posverdad';
+                        col1.subtitle = 'Fundamentación teórica';
+                    }
+                    const card1 = col1 && col1.cards ? col1.cards.find(k => k.id === 'c1-1') : null;
+                    if (card1 && !card1.videoUrl) {
+                        card1.videoUrl = 'https://www.youtube.com/embed/WRJnVyqVGpc';
+                        card1.videoWatchUrl = 'https://www.youtube.com/watch?v=WRJnVyqVGpc';
+                    }
+                    const card2 = col1 && col1.cards ? col1.cards.find(k => k.id === 'c1-2') : null;
+                    if (card2 && !card2.videoUrl) {
+                        card2.videoUrl = 'https://www.youtube.com/embed/37A4S9bim_U';
+                        card2.videoWatchUrl = 'https://www.youtube.com/watch?v=37A4S9bim_U';
+                    }
+                    if (card2 && !card2.imageUrl) {
+                        card2.imageUrl = 'https://www.clarin.com/img/2026/04/06/8Q5zeCtzL_1256x620__1.jpg';
+                    }
+                    const card4 = col1 && col1.cards ? col1.cards.find(k => k.id === 'c1-4') : null;
+                    if (card4 && card4.title === 'Compostaje mediático, «Blanco Activo» y reconstrucción de lo real') {
+                        card4.badge = '✋ Categoría 4 • Inteligencia de las Manos';
+                        card4.title = 'La «inteligencia de las manos» y la dimensión sensorial del cuerpo';
+                        card4.summary = 'El acto de leer, escribir y manipular herramientas involucra una relación física, táctil y rítmica entre el cuerpo y la materia que las máquinas no replican; allí reside parte de la singularidad humana y creativa.';
+                        card4.quote = '«El “factor humano” depende menos de nuestra habilidad intelectual que de un recorrido sensorial. La inteligencia artificial puede discernir entre una imagen y otra, pero, al menos por ahora, carece de una mano que se mueva como la nuestra» (Villoro, 2024, pp. 79-80).';
+                        delete card4.secondaryNote;
+                        delete card4.svgType;
+                    }
+                    if (card4 && !card4.imageUrl) {
+                        card4.imageUrl = 'https://img.magnific.com/fotos-premium/mano-humana-mano-robotica-sosteniendo-lapiz_1229620-2523.jpg?semt=ais_hybrid&w=740&q=80';
+                    }
+                    const col2 = columnsData.find(c => c.id === 'col2');
+                    const card2_1 = col2 && col2.cards ? col2.cards.find(k => k.id === 'c2-1') : null;
+                    if (card2_1 && card2_1.title === 'Del scroll impulsivo en TikTok al cuaderno rayado y la crónica territorial') {
+                        card2_1.title = 'Del scroll impulsivo al cuaderno rayado y la crónica territorial.';
+                    }
+                    const oldSummariesC2_1 = [
+                        'Reflexión educativa: En colegios de bachillerato en Colombia (grados 10.° y 11.°), el sistema del celular recorta la motricidad fina y entrena respuestas reactivas ante videos de 15 segundos sobre conflictos sociales o ambientales. Rescatar el sistema de la mano —mediante diarios de campo manuscritos, recortes de prensa impresa y escritura en cinta bicolor (negro para hechos, rojo para dudas)— restituye el intervalo reflexivo para que el adolescente nombre su territorio con voz propia.',
+                        'En el sistema educativo formal de Colombia (grados 10.° y 11.°), el celular recorta la motricidad fina y entrena respuestas reactivas ante videos de 15 segundos sobre conflictos sociales o ambientales. Rescatar el sistema de la mano —mediante diarios de campo manuscritos, recortes de prensa impresa y escritura en cinta bicolor (negro para hechos, rojo para dudas)— restituye el intervalo reflexivo para que los y las adolescentes nombren su territorio con voz propia.'
+                    ];
+                    if (card2_1 && oldSummariesC2_1.includes(card2_1.summary)) {
+                        card2_1.summary = 'En el sistema educativo formal de Colombia, el celular recorta la motricidad fina y entrena respuestas reactivas ante videos de 15 segundos sobre conflictos sociales o ambientales. Rescatar el sistema de la mano —mediante diarios de campo manuscritos, recortes de prensa impresa y escritura en cinta bicolor (negro para hechos, rojo para dudas)— restituye el intervalo reflexivo para que los y las adolescentes nombren su territorio con voz propia.';
+                    }
+                    if (card2_1 && !card2_1.imageUrl) {
+                        card2_1.imageUrl = 'https://unamglobal.unam.mx/wp-content/uploads/2025/10/destacada-escritura-a-mano-1024x605.jpg';
+                    }
+                    if (card2_1) {
+                        const defaultLinksC2_1 = [
+                            {
+                                label: 'Artículo Divulgativo • UNAM Global',
+                                title: 'Escritura a mano, cerebro y aprendizaje — UNAM Global Revista',
+                                url: 'https://unamglobal.unam.mx/global_revista/escritura-a-mano-cerebro-aprendizaje-unam/'
+                            },
+                            {
+                                label: 'Recurso Oficial • Ministerio de Educación Nacional',
+                                title: 'Capítulo 6: La escritura como herramienta para descubrirnos a nosotros mismos',
+                                url: 'https://www.mineducacion.gov.co/portal/micrositios-institucionales/Educacion-para-la-vida/414653:Capitulo-6-La-escritura-como-herramienta-para-descubrirnos-a-nosotros-mismos'
+                            },
+                            {
+                                label: 'Cartilla Pedagógica PDF • Colombia Aprende',
+                                title: 'Prácticas de Escritura en el Aula — Plan Nacional de Lectura y Escritura',
+                                url: 'https://colombiaaprende.edu.co/sites/default/files/files_public/plan-lectura-2021/manuales-y-cartillas/Practicas_de_Escritura_en_el_Aula.pdf'
+                            }
+                        ];
+                        if (!Array.isArray(card2_1.linkBoxes)) {
+                            card2_1.linkBoxes = defaultLinksC2_1;
+                            delete card2_1.linkBox;
+                        } else {
+                            defaultLinksC2_1.forEach(item => {
+                                if (!card2_1.linkBoxes.some(existing => existing.url === item.url)) {
+                                    card2_1.linkBoxes.push(item);
+                                }
+                            });
+                        }
+                    }
+                    const card2_2 = col2 && col2.cards ? col2.cards.find(k => k.id === 'c2-2') : null;
+                    if (card2_2 && card2_2.title === 'Contra el «copiar-pegar» digital: Bitácoras táctiles y Stop-Motion crítico') {
+                        card2_2.title = 'Contra el «copiar-pegar» digital: Ewscribir, tachar, anotar, dibujar.';
+                    }
+                    if (card2_2 && card2_2.summary === 'Reflexión educativa: En facultades de comunicación, educación y ciencias sociales en Colombia, el consumo acelerado de resúmenes en pantallas móviles y textos generados automáticamente mutila los procesos motores y cognitivos de síntesis, borrando el «arrepentimiento» y la reescritura artesanal. La propuesta contrapone cartografías sociales dibujadas a mano y videoensayos en stop-motion fabricados cuadro a cuadro con objetos físicos.') {
+                        card2_2.summary = 'El consumo acelerado de resúmenes en pantallas móviles y textos generados automáticamente mutila los procesos motores y cognitivos de síntesis, borrando el «arrepentimiento» y la reescritura artesanal. Escribir, rayar o dibujar  se puede considerar como un “acto de poder” que puede tener colores, figuras, listas o dobleces. Alienta un diálogo personal, directo y profundo entre quien lee y el escritor.';
+                    }
+                    if (card2_2 && !card2_2.imageUrl) {
+                        card2_2.imageUrl = 'https://estaticos.elcolombiano.com/documents/10157/0/780x622/0c28/780d565/none/11101/BSHH/image_content_35581373_20200420182116.jpg';
+                    }
+                    const card2_3 = col2 && col2.cards ? col2.cards.find(k => k.id === 'c2-3') : null;
+                    if (card2_3 && (!card2_3.imageUrl || card2_3.imageUrl.startsWith('blob:'))) {
+                        card2_3.imageUrl = 'https://share.gemini.google/FbnveGvScZ5S';
+                    }
+                    if (card2_3 && card2_3.summary === 'Reflexión educativa: En seminarios de posgrado (como la Maestría en Comunicación y Educación en Colombia), la hiperconectividad fragmenta la atención investigativa en múltiples pestañas y notificaciones. Retomar la ficha analítica manuscrita, el esquema topológico trazado a pulso y la lectura lenta con «blanco activo» devuelve rigor hermenéutico y compromiso ético al investigador frente a las problemáticas del mundo de la vida.') {
+                        card2_3.summary = 'El «inadaptado digital» es quien no se deja absorber por completo por la velocidad, la superficie de la pantalla ni la lógica automática de lo digital. En la perspectiva de Graciela Speranza —y en diálogo con la mirada crítica sobre la lectura y la tecnología—, esta categoría no significa rechazo tecnofóbico ni aislamiento ingenuo, sino una forma activa de desajuste perceptivo: detenerse, mirar en tres dimensiones, tocar la materia, sostener la memoria y buscar «volver a hacer real lo real» cuando todo empuja hacia lo instantáneo y lo virtual.';
+                    }
+                    const card2_4 = col2 && col2.cards ? col2.cards.find(k => k.id === 'c2-4') : null;
+                    if (card2_4 && card2_4.summary === 'Reflexión de síntesis: El sistema del celular amputa procesos neuro-motores y cognitivos indispensables al reducir el cuerpo a una yema dactilar que desliza superficies planas sin resistencia. Nuestra propuesta rescata el sistema de la mano mediante una arquitectura pedagógica híbrida (Muro Padlet de contraste + Videoensayo Stop-Motion) donde el gesto manual precede, interroga y humaniza lo digital.') {
+                        card2_4.summary = 'El mundo digital amputa procesos neuro-motores y cognitivos indispensables para desarrollo cognitivo y físico del ser humano, en relación con su ámbiente inmediato, al apartar el cuerpo y reducir a una yema dactilar que desliza superficies planas sin resistencia.';
+                    }
+                    const col3 = columnsData.find(c => c.id === 'col3');
+                    const card3_1 = col3 && col3.cards ? col3.cards.find(k => k.id === 'c3-1') : null;
+                    if (card3_1 && !card3_1.linkBox) {
+                        card3_1.linkBox = {
+                            label: 'Plataforma Contraforense de Libre Acceso',
+                            title: 'Forensic Architecture — Archivo de Investigaciones',
+                            url: 'https://forensic-architecture.org/'
+                        };
+                    }
+                    const card3_2 = col3 && col3.cards ? col3.cards.find(k => k.id === 'c3-2') : null;
+                    if (card3_2 && !card3_2.imageUrl) {
+                        card3_2.imageUrl = 'https://www.c41magazine.com/wp-content/uploads/2023/03/Daily_No_2_Ascher-180dpi.jpg';
+                        card3_2.imageCaption = 'Thomas Demand — Daily #2 (Serie The Dailies, 2012)';
+                    }
+                    const card3_3 = col3 && col3.cards ? col3.cards.find(k => k.id === 'c3-3') : null;
+                    if (card3_3 && !card3_3.imageUrl) {
+                        card3_3.imageUrl = 'https://yorokobu.b-cdn.net/wp-content/uploads/2013/05/Captura-de-pantalla-2013-05-24-a-las-02.11.35.png';
+                    }
+                    if (card3_3 && !card3_3.secondaryImageUrl) {
+                        card3_3.secondaryImageUrl = 'https://yorokobu.b-cdn.net/wp-content/uploads/2013/05/1nino.jpg';
+                    }
+                    const card3_4 = col3 && col3.cards ? col3.cards.find(k => k.id === 'c3-4') : null;
+                    if (card3_4 && !card3_4.videoUrl) {
+                        card3_4.videoUrl = 'https://www.youtube.com/embed/ttfC6r5q2Uc';
+                        card3_4.videoWatchUrl = 'https://www.youtube.com/watch?v=ttfC6r5q2Uc';
+                    }
+                    const col4 = columnsData.find(c => c.id === 'col4');
+                    if (col4 && Array.isArray(col4.cards) && !col4.cards.some(k => k.id === 'c4-2')) {
+                        col4.cards.push({
+                            id: 'c4-2',
+                            type: 'teoria',
+                            badge: '✨ Cierre • Síntesis Educomunicativa',
+                            title: 'Volver sensible lo invisible',
+                            summary: 'Educar en el lenguaje y en la comunicación en pleno siglo XXI exige comprender que leer no es un acto pasivo de consumo ni una simple competencia técnica para aprobar pruebas: es una forma de habitar el mundo, de interrogar lo que parece obvio y de construir vínculos significativos. Tanto Graciela Speranza como Juan Villoro nos advierten que vivimos tiempos en los que lo urgente y lo espectacular tienden a ocultar lo profundo, lo frágil y lo que ocurre a escalas que exigen cuidado y demora. En un país como Colombia, donde la palabra, la memoria y el territorio están profundamente entrelazados, formar lectores y comunicadores críticos es también formar ciudadanos sensibles a las consecuencias de sus actos y de sus discursos.\n\nEn conclusión, el llamado es a habitar el universo digital con lucidez, criterio y medida, sin renunciar a la potencia formadora de «utilizar la mano». Usar la mano —al escribir, trazar, hojear, tocar la materia, cultivar o cuidar lo próximo— no es un gesto nostálgico ni un retroceso histórico: es el anclaje corporal y ético que impide que nuestra inteligencia se vuelva abstracta, mecánica o indiferente. Cuando unimos el discernimiento crítico frente a lo digital con el trabajo atento y sensible de la mano, desarrollamos una inteligencia más profunda, creativa y lúcida, y cultivamos una verdadera empatía con el mundo —con las personas, con las cosas y con la vida toda que compartimos en este planeta.',
+                            likes: 21,
+                            comments: []
+                        });
+                    }
+                } else {
+                    columnsData = JSON.parse(JSON.stringify(INITIAL_COLUMNS));
+                }
+
+                restoreCommentsBackup();
+
+                const savedCreations = localStorage.getItem('padlet_nosoyunrobot_v3_creations');
+                if (savedCreations) {
+                    manualCreations = JSON.parse(savedCreations) || [];
+                }
+
+                const savedFpComments = localStorage.getItem('padlet_nosoyunrobot_v3_fp_comments');
+                if (savedFpComments) {
+                    fourthPersonWindowComments = JSON.parse(savedFpComments) || [];
+                }
+            } catch (e) {
+                columnsData = JSON.parse(JSON.stringify(INITIAL_COLUMNS));
+                restoreCommentsBackup();
+                manualCreations = [];
+                fourthPersonWindowComments = [];
+            }
+
+            renderBoard();
+            renderPublicSymposiumSection();
+            setupChiaroscuroCursor();
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal('detailModal');
+                    closeModal('addModal');
+                    closeModal('biblioModal');
+                }
+            });
+        }
+
+        // Respaldo dedicado de comentarios y aportes del Simposio para asegurar persistencia
+        function buildCommentsMap() {
+            const map = {};
+            columnsData.forEach(col => {
+                (col.cards || []).forEach(card => {
+                    map[card.id] = Array.isArray(card.comments) ? card.comments : [];
+                });
+            });
+            map['fourthPersonCreationWindow'] = Array.isArray(fourthPersonWindowComments) ? fourthPersonWindowComments : [];
+            return map;
+        }
+
+        function restoreCommentsBackup() {
+            let backupMap = null;
+            try {
+                const rawBackup = localStorage.getItem('padlet_nosoyunrobot_v3_comments_backup');
+                if (rawBackup) {
+                    backupMap = JSON.parse(rawBackup);
+                }
+            } catch (e) {}
+
+            if (!backupMap && window.name && window.name.startsWith('PADLET_NSUR_COMMENTS:')) {
+                try {
+                    backupMap = JSON.parse(window.name.slice('PADLET_NSUR_COMMENTS:'.length));
+                } catch (e) {}
+            }
+
+            if (backupMap && typeof backupMap === 'object') {
+                columnsData.forEach(col => {
+                    (col.cards || []).forEach(card => {
+                        if (Array.isArray(backupMap[card.id])) {
+                            card.comments = backupMap[card.id];
+                        }
+                    });
+                });
+                if (Array.isArray(backupMap['fourthPersonCreationWindow'])) {
+                    fourthPersonWindowComments = backupMap['fourthPersonCreationWindow'];
+                }
+            }
+        }
+
+        function saveState() {
+            const commentsMap = buildCommentsMap();
+            try {
+                localStorage.setItem('padlet_nosoyunrobot_v3_comments_backup', JSON.stringify(commentsMap));
+            } catch (e) {}
+            try {
+                window.name = 'PADLET_NSUR_COMMENTS:' + JSON.stringify(commentsMap);
+            } catch (e) {}
+            try {
+                localStorage.setItem('padlet_nosoyunrobot_v3_cols', JSON.stringify(columnsData));
+            } catch (e) {
+                // Mantiene el estado activo en memoria si localStorage no está disponible
+            }
+            try {
+                localStorage.setItem('padlet_nosoyunrobot_v3_fp_comments', JSON.stringify(fourthPersonWindowComments));
+            } catch (e) {}
+            try {
+                localStorage.setItem('padlet_nosoyunrobot_v3_creations', JSON.stringify(manualCreations));
+            } catch (e) {
+                // Evita que imágenes pesadas bloqueen el guardado de las anotaciones
+            }
+        }
+
+        function resetBoardData() {
+            columnsData = JSON.parse(JSON.stringify(INITIAL_COLUMNS));
+            manualCreations = [];
+            fourthPersonWindowComments = [];
+            saveState();
+            renderBoard();
+            renderPublicSymposiumSection();
+            closeModal('biblioModal');
+            showToast('Muro restaurado a las 4 columnas y 14 ventanas originales.');
+        }
+
+        // Navegación suave hacia la Columna 4 ("Lo que podemos ver")
+        function scrollToFourthColumn() {
+            if (currentColFilter !== 'all' && currentColFilter !== 'col4') {
+                filterColumns('all');
+            }
+            setTimeout(() => {
+                const col4El = document.getElementById('column-col4');
+                const boardMain = document.getElementById('padletBoardMain');
+                if (col4El && boardMain) {
+                    boardMain.scrollTo({
+                        left: col4El.offsetLeft - 24,
+                        behavior: 'smooth'
+                    });
+                }
+                showToast('Columna 4: Usa tu dedo o mouse (sin teclado) para crear en 4.ª persona.');
+            }, 60);
+        }
+
+        // Filtrado de columnas en la barra superior
+        function filterColumns(colId) {
+            currentColFilter = colId;
+            document.querySelectorAll('.col-filter-btn').forEach(btn => {
+                if (btn.dataset.colfilter === colId) {
+                    btn.className = 'col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg transition-all';
+                } else {
+                    btn.className = 'col-filter-btn px-2.5 py-1 rounded-lg font-medium bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted hover:text-paper-ink dark:hover:text-white border border-paper-border dark:border-abyss-border transition-all';
+                }
+            });
+            renderBoard();
+        }
+
+        // Efecto linterna de claroscuro en modo oscuridad (Speranza / Agamben)
+        function setupChiaroscuroCursor() {
+            const updateCoords = (x, y) => {
+                document.documentElement.style.setProperty('--mouse-x', `${x}px`);
+                document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+            };
+            window.addEventListener('mousemove', (e) => updateCoords(e.clientX, e.clientY));
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches.length) {
+                    updateCoords(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+        }
+
+        // Alternar entre Modo Papel (Luz) y Modo Oscuridad Crítica
+        function toggleTheme() {
+            const htmlEl = document.documentElement;
+            const isDark = htmlEl.classList.contains('dark');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+
+            if (isDark) {
+                htmlEl.classList.remove('dark');
+                htmlEl.classList.add('light');
+                if (icon) icon.textContent = '🌑';
+                if (text) text.textContent = 'Modo Oscuridad Crítica';
+                showToast('Modo Papel de Archivo activado.');
+            } else {
+                htmlEl.classList.remove('light');
+                htmlEl.classList.add('dark');
+                if (icon) icon.textContent = '📜';
+                if (text) text.textContent = 'Modo Papel de Archivo';
+                showToast('Modo Oscuridad Crítica activado: mueve el cursor para iluminar.');
+            }
+        }
+
+        // Interacción simbólica del CAPTCHA "No soy un robot"
+        function toggleHumanVerification() {
+            humanVerified = !humanVerified;
+            const box = document.getElementById('captchaBox');
+            const label = document.getElementById('captchaLabel');
+            if (humanVerified) {
+                box.textContent = '✓';
+                label.textContent = 'No soy un robot';
+                showToast('Identidad humana afirmada mediante el tacto y la lectura crítica.');
+            } else {
+                box.textContent = '🤖';
+                label.textContent = 'Modo Autómata';
+                showToast('Alerta: Lectura acelerada sin pausa interpretativa.');
+            }
+        }
+
+        // Generador de Ilustraciones SVG Artísticas
+        function getCardSVG(type) {
+            switch (type) {
+                case 'chiaroscuro':
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#111318] block">
+                        <defs>
+                            <radialGradient id="eyeLight" cx="50%" cy="50%" r="55%">
+                                <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.85"/>
+                                <stop offset="45%" stop-color="#B45309" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="#0B0D11" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <rect width="360" height="160" fill="#0B0D11"/>
+                        <g stroke="#262C3A" stroke-width="0.8" stroke-dasharray="3 3">
+                            <line x1="0" y1="35" x2="360" y2="35"/>
+                            <line x1="0" y1="80" x2="360" y2="80"/>
+                            <line x1="0" y1="125" x2="360" y2="125"/>
+                            <line x1="90" y1="0" x2="90" y2="160"/>
+                            <line x1="180" y1="0" x2="180" y2="160"/>
+                            <line x1="270" y1="0" x2="270" y2="160"/>
+                        </g>
+                        <circle cx="180" cy="80" r="90" fill="url(#eyeLight)"/>
+                        <path d="M 65 80 Q 180 18 295 80 Q 180 142 65 80 Z" fill="none" stroke="#FBBF24" stroke-width="2"/>
+                        <circle cx="180" cy="80" r="22" fill="#141821" stroke="#F59E0B" stroke-width="2.5"/>
+                        <circle cx="180" cy="80" r="8" fill="#FDE68A"/>
+                        <text x="16" y="22" fill="#6B7280" font-family="monospace" font-size="9">01001100 01010101 01011010</text>
+                        <text x="108" y="148" fill="#FBBF24" font-family="serif" font-style="italic" font-size="11">«Percibir en la oscuridad»</text>
+                    </svg>`;
+                case 'handShadow':
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#EFE9DC] block">
+                        <rect width="360" height="160" fill="#F6F1E3"/>
+                        <line x1="0" y1="40" x2="360" y2="40" stroke="#D6CEBE" stroke-width="1"/>
+                        <line x1="0" y1="80" x2="360" y2="80" stroke="#D6CEBE" stroke-width="1"/>
+                        <line x1="0" y1="120" x2="360" y2="120" stroke="#D6CEBE" stroke-width="1"/>
+                        <line x1="45" y1="0" x2="45" y2="160" stroke="#DC2626" stroke-width="1" stroke-opacity="0.4"/>
+                        <path d="M125,138 C115,110 110,85 118,60 C121,50 129,52 128,65 L127,87 L136,42 C139,31 148,33 146,46 L142,84 L155,38 C158,28 167,31 164,44 L157,86 L172,48 C176,39 184,43 180,55 L170,92 L186,70 C192,63 199,69 193,79 L172,116 C165,128 158,136 152,142 Z" 
+                              fill="#1C1917" fill-opacity="0.16" transform="translate(14, 6)"/>
+                        <path d="M125,138 C115,110 110,85 118,60 C121,50 129,52 128,65 L127,87 L136,42 C139,31 148,33 146,46 L142,84 L155,38 C158,28 167,31 164,44 L157,86 L172,48 C176,39 184,43 180,55 L170,92 L186,70 C192,63 199,69 193,79 L172,116 C165,128 158,136 152,142 Z" 
+                              fill="#FCFBF7" stroke="#1C1917" stroke-width="2"/>
+                        <path d="M 195 78 Q 230 58 255 81 T 325 71" fill="none" stroke="#1C1917" stroke-width="2.2" stroke-linecap="round"/>
+                        <path d="M 205 98 Q 245 118 280 94 T 335 104" fill="none" stroke="#B91C1C" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round"/>
+                        <text x="208" y="50" fill="#B91C1C" font-family="cursive" font-size="15" font-weight="bold">Elogio de la mano</text>
+                        <text x="210" y="140" fill="#57534E" font-family="monospace" font-size="9">TINTA BICOLOR // HUELLA REAL</text>
+                    </svg>`;
+                case 'reconstruction':
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#1C222D] block">
+                        <rect width="360" height="160" fill="#181D26"/>
+                        <rect x="28" y="28" width="110" height="102" rx="8" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
+                        <line x1="45" y1="56" x2="120" y2="56" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <line x1="45" y1="74" x2="105" y2="74" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <line x1="45" y1="92" x2="115" y2="92" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="43" y="118" fill="#38BDF8" font-family="monospace" font-size="8">VIRTUALIDAD PLANA</text>
+                        <path d="M 150 80 L 195 80" stroke="#F59E0B" stroke-width="2" stroke-dasharray="3 3"/>
+                        <polygon points="195,75 205,80 195,85" fill="#F59E0B"/>
+                        <g transform="translate(215, 24)">
+                            <polygon points="55,10 110,38 55,66 0,38" fill="#D97706" fill-opacity="0.85" stroke="#FDE68A" stroke-width="1.5"/>
+                            <polygon points="0,38 55,66 55,110 0,82" fill="#92400E" stroke="#FDE68A" stroke-width="1.5"/>
+                            <polygon points="110,38 55,66 55,110 110,82" fill="#B45309" stroke="#FDE68A" stroke-width="1.5"/>
+                            <text x="14" y="124" fill="#FDE68A" font-family="monospace" font-size="8">VOLUMEN &amp; MATERIA 3D</text>
+                        </g>
+                    </svg>`;
+                case 'gestalt':
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#F8F5EC] block">
+                        <rect width="360" height="160" fill="#F8F5EC"/>
+                        <g stroke="#B45309" stroke-width="1.5" stroke-dasharray="4 3">
+                            <line x1="70" y1="115" x2="125" y2="62"/>
+                            <line x1="125" y1="62" x2="195" y2="42"/>
+                            <line x1="195" y1="42" x2="275" y2="72"/>
+                            <line x1="275" y1="72" x2="230" y2="125"/>
+                            <line x1="230" y1="125" x2="145" y2="120"/>
+                            <line x1="145" y1="120" x2="70" y2="115"/>
+                            <line x1="125" y1="62" x2="230" y2="125"/>
+                            <line x1="195" y1="42" x2="145" y2="120"/>
+                        </g>
+                        <polygon points="62,109 78,107 72,123" fill="#B91C1C"/>
+                        <rect x="118" y="55" width="14" height="14" rx="2" fill="#1C1917"/>
+                        <circle cx="195" cy="42" r="8" fill="#D97706"/>
+                        <polygon points="275,62 285,79 265,79" fill="#15803D"/>
+                        <circle cx="230" cy="125" r="7" fill="#B91C1C"/>
+                        <rect x="138" y="113" width="13" height="13" transform="rotate(20 145 120)" fill="#D97706"/>
+                        <text x="95" y="23" fill="#1C1917" font-family="serif" font-weight="bold" font-size="12">Gestalt: «Toda ceniza es un polen»</text>
+                        <text x="118" y="148" fill="#57534E" font-family="monospace" font-size="9">[ BLANCO ACTIVO DE LECTURA ]</text>
+                    </svg>`;
+                case 'fourthPerson':
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#0F1E1C] block">
+                        <rect width="360" height="160" fill="#0E1C1A"/>
+                        <g stroke="#34D399" stroke-width="1.2" stroke-opacity="0.55">
+                            <line x1="180" y1="80" x2="75" y2="42"/>
+                            <line x1="180" y1="80" x2="285" y2="42"/>
+                            <line x1="180" y1="80" x2="70" y2="122"/>
+                            <line x1="180" y1="80" x2="290" y2="122"/>
+                            <line x1="75" y1="42" x2="285" y2="42"/>
+                            <line x1="70" y1="122" x2="290" y2="122"/>
+                            <line x1="75" y1="42" x2="70" y2="122"/>
+                            <line x1="285" y1="42" x2="290" y2="122"/>
+                        </g>
+                        <circle cx="180" cy="80" r="27" fill="#132A27" stroke="#6EE7B7" stroke-width="2"/>
+                        <text x="163" y="84" fill="#A7F3D0" font-family="serif" font-weight="bold" font-size="11">4.ª Pers.</text>
+                        <circle cx="75" cy="42" r="13" fill="#064E3B" stroke="#34D399" stroke-width="1.5"/>
+                        <text x="58" y="22" fill="#6EE7B7" font-family="monospace" font-size="9">BOSQUE</text>
+                        <circle cx="285" cy="42" r="13" fill="#064E3B" stroke="#38BDF8" stroke-width="1.5"/>
+                        <text x="272" y="22" fill="#7DD3FC" font-family="monospace" font-size="9">RÍO</text>
+                        <circle cx="70" cy="122" r="13" fill="#78350F" stroke="#FBBF24" stroke-width="1.5"/>
+                        <text x="44" y="146" fill="#FDE68A" font-family="monospace" font-size="9">COMUNIDAD</text>
+                        <circle cx="290" cy="122" r="13" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="1.5"/>
+                        <text x="268" y="146" fill="#FECACA" font-family="monospace" font-size="9">MEMORIA</text>
+                        <text x="108" y="150" fill="#A7F3D0" font-family="serif" font-style="italic" font-size="11">«Ternura: mirar lo vivo en red»</text>
+                    </svg>`;
+                case 'hybridLab':
+                default:
+                    return `
+                    <svg viewBox="0 0 360 160" class="w-full h-auto bg-[#12161F] block">
+                        <rect width="360" height="160" fill="#12161F"/>
+                        <rect x="20" y="32" width="92" height="90" rx="10" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+                        <text x="36" y="60" fill="#38BDF8" font-family="monospace" font-size="10" font-weight="bold">1. FEED</text>
+                        <text x="30" y="78" fill="#CBD5E1" font-family="sans-serif" font-size="9">Captura viral</text>
+                        <text x="30" y="91" fill="#CBD5E1" font-family="sans-serif" font-size="9">en Padlet</text>
+                        <path d="M 116 78 L 132 78" stroke="#F59E0B" stroke-width="2"/>
+                        <rect x="134" y="32" width="92" height="90" rx="10" fill="#292118" stroke="#F59E0B" stroke-width="1.5"/>
+                        <text x="148" y="60" fill="#FBBF24" font-family="monospace" font-size="10" font-weight="bold">2. MANO</text>
+                        <text x="144" y="78" fill="#FDE68A" font-family="sans-serif" font-size="9">Archivo local</text>
+                        <text x="144" y="91" fill="#FDE68A" font-family="sans-serif" font-size="9">&amp; manuscrito</text>
+                        <path d="M 230 78 L 246 78" stroke="#F59E0B" stroke-width="2"/>
+                        <rect x="248" y="32" width="92" height="90" rx="10" fill="#27171A" stroke="#F43F5E" stroke-width="1.5"/>
+                        <text x="258" y="60" fill="#FDA4AF" font-family="monospace" font-size="10" font-weight="bold">3. CINE</text>
+                        <text x="258" y="78" fill="#FFE4E6" font-family="sans-serif" font-size="9">Videoensayo</text>
+                        <text x="258" y="91" fill="#FFE4E6" font-family="sans-serif" font-size="9">Stop-Motion</text>
+                        <text x="82" y="145" fill="#9CA3AF" font-family="monospace" font-size="9">DISPOSITIVO EDUCOMUNICATIVO COLOMBIA</text>
+                    </svg>`;
+            }
+        }
+
+        // Renderizar todo el muro Padlet (4 columnas)
+        function renderBoard() {
+            const boardMain = document.getElementById('padletBoardMain');
+            const prevBoardScrollLeft = boardMain ? boardMain.scrollLeft : 0;
+            const prevColScrolls = {};
+            document.querySelectorAll('[id^="column-"]').forEach(el => {
+                const scrollArea = el.querySelector('.column-scroll');
+                if (scrollArea) {
+                    prevColScrolls[el.id] = scrollArea.scrollTop;
+                }
+            });
+
+            const container = document.getElementById('boardColumns');
+            container.innerHTML = '';
+
+            const visibleColumns = columnsData.filter(col => currentColFilter === 'all' || col.id === currentColFilter);
+
+            visibleColumns.forEach((col) => {
+                const colEl = document.createElement('section');
+                colEl.id = `column-${col.id}`;
+
+                if (col.isInteractiveCreationColumn) {
+                    // COLUMNA 4: "Lo que podemos ver" (Ventana audiovisual en primer lugar + ventana interactiva de escritura/dibujo manual sin teclado)
+                    const totalCol4Windows = (col.cards ? col.cards.length : 0) + 1;
+                    colEl.className = 'w-[375px] sm:w-[445px] shrink-0 flex flex-col max-h-[calc(100vh-195px)] rounded-2xl bg-paper-card/75 dark:bg-abyss-card/75 border-2 border-paper-crimson/40 dark:border-abyss-glow/40 backdrop-blur-sm transition-colors duration-500 shadow-lg';
+
+                    colEl.innerHTML = `
+                        <div class="p-4 border-b border-paper-border/80 dark:border-abyss-border/80">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-paper-crimson/15 dark:bg-abyss-glow/20 text-paper-crimson dark:text-abyss-glow">
+                                    COLUMNA ${col.number} • PARTICIPACIÓN EN VIVO
+                                </span>
+                                <span class="font-mono text-[11px] text-paper-muted dark:text-abyss-muted">
+                                    ${totalCol4Windows} ventanas
+                                </span>
+                            </div>
+                            <h2 class="font-serif text-base sm:text-lg font-bold leading-snug">
+                                ${col.title}
+                            </h2>
+                            <p class="tech-subtitle text-xs sm:text-[13px] font-bold mt-0.5">
+                                ${col.subtitle}
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 space-y-4 overflow-y-auto column-scroll flex-1">
+                            ${(col.cards || []).map(card => renderCardHTML(col.id, card)).join('')}
+
+                            <!-- VENTANA CREATIVA DE LA COLUMNA 4: ESCRITURA MANUAL / DIBUJO SIN TECLADO -->
+                            <article id="fourthPersonCreationWindow"
+                                     onkeydown="blockKeyboardInCreation(event)"
+                                     onkeypress="blockKeyboardInCreation(event)"
+                                     onkeyup="blockKeyboardInCreation(event)"
+                                     class="tactile-card relative rounded-xl bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border p-4 select-none">
+                                <div class="tape-strip"></div>
+
+                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2 mt-1">
+                                    <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-md border bg-teal-500/15 text-teal-800 dark:text-teal-300 border-teal-500/30">
+                                        ✍️ Narrador en 4.ª Persona (Olga Tokarczuk)
+                                    </span>
+                                    <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30">
+                                        🚫 Sin Teclado • Solo Dedo / Mouse
+                                    </span>
+                                </div>
+
+                                <h3 class="font-serif text-[16px] sm:text-[17px] font-bold leading-snug mb-1.5">
+                                    Escritura manual y dibujo en «Cuarta Persona»
+                                </h3>
+
+                                <p class="tech-paragraph text-[12.5px] leading-relaxed mb-2.5">
+                                    <strong>Consigna participativa:</strong> Sin usar el teclado del celular ni del computador, traza a mano con tu <strong>dedo o el cursor del mouse</strong> un breve relato manuscrito o un dibujo desde la mirada de la <strong>cuarta persona</strong> de Olga Tokarczuk: adopta la voz de un ser de tu entorno (un río, un árbol, un pájaro, un cuaderno o un abuelo) tejiendo con <em>ternura</em> los hilos invisibles que nos conectan lejos de las pantallas.
+                                </p>
+
+                                <blockquote class="p-2 rounded-lg bg-paper-bg/90 dark:bg-abyss-bg/90 border-l-2 border-paper-crimson dark:border-abyss-glow text-[11px] italic text-paper-ink/90 dark:text-gray-300 mb-3">
+                                    «...logra abarcar la perspectiva de cada uno de los personajes, además de tener la capacidad de ir más allá del horizonte de cada uno de ellos, que ve más y tiene una visión más amplia» (Tokarczuk, citada en Speranza, 2022, cap. I).
+                                </blockquote>
+
+                                <!-- Controles táctiles de tinta bicolor y grosor (100% clic/toque, sin teclado) -->
+                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+                                    <div class="flex items-center gap-1.5">
+                                        <button id="inkBlackBtn" type="button" onclick="setInkColor('#1C1917')"
+                                                class="px-2 py-1 rounded-lg text-[11px] font-mono border-2 border-paper-ink bg-white text-stone-900 font-bold shadow-sm transition-all">
+                                            ⚫ Tinta Negra
+                                        </button>
+                                        <button id="inkRedBtn" type="button" onclick="setInkColor('#B91C1C')"
+                                                class="px-2 py-1 rounded-lg text-[11px] font-mono border border-paper-crimson/40 bg-red-50 text-red-800 opacity-85 hover:opacity-100 transition-all">
+                                            🔴 Tinta Roja
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <button id="strokeFineBtn" type="button" onclick="setStrokeWidth(2.4)"
+                                                class="px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-ink/40 bg-paper-bg dark:bg-abyss-bg text-paper-ink dark:text-white font-bold">
+                                            🖋️ Escribir
+                                        </button>
+                                        <button id="strokeBoldBtn" type="button" onclick="setStrokeWidth(5.2)"
+                                                class="px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-border dark:border-abyss-border text-paper-muted dark:text-gray-300">
+                                            🖌️ Dibujar
+                                        </button>
+                                        <button type="button" onclick="clearHandCanvas()"
+                                                class="px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-border dark:border-abyss-border text-paper-muted hover:text-paper-crimson dark:hover:text-red-400">
+                                            Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Papel rayado táctil para escritura manual o dibujo con dedo / mouse -->
+                                <div class="relative rounded-xl overflow-hidden border-2 border-paper-border dark:border-abyss-border bg-[#FCFBF7] shadow-inner mb-2.5">
+                                    <canvas id="handCanvas" class="w-full h-56 touch-none cursor-crosshair block"></canvas>
+                                    <div id="canvasHint" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center pl-8 pr-3 text-center select-none">
+                                        <span class="font-hand text-xl text-stone-500">✍️ Escribe a mano o dibuja aquí con tu dedo o mouse</span>
+                                        <span class="font-mono text-[10px] text-stone-400 mt-0.5">(Teclado deshabilitado • Gesto 100% táctil)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Selector táctil de rol/firma sin teclado -->
+                                <div class="mb-2">
+                                    <span class="block font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-abyss-muted mb-1">
+                                        Firma táctil del participante (selecciona con toque/clic):
+                                    </span>
+                                    <div id="fpRoleButtons" class="flex flex-wrap gap-1">
+                                        ${['Asistente Simposio', 'Jurado', 'Estudiante', 'Docente', 'Ponente'].map(role => `
+                                            <button type="button" onclick="setFourthPersonAuthor('${role}')" data-fprole="${role}"
+                                                    class="fp-role-btn px-2 py-0.5 rounded-md text-[10px] font-mono border transition-all ${selectedFourthPersonAuthor === role ? 'bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg border-paper-ink dark:border-abyss-glow font-bold' : 'bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-gray-300 border-paper-border dark:border-abyss-border'}">
+                                                ${role}
+                                            </button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <!-- Botón táctil para estampar la creación en la galería de esta ventana -->
+                                <button type="button" onclick="stampFourthPersonCreation()"
+                                        class="w-full py-2.5 px-3 rounded-xl text-xs font-bold bg-paper-crimson text-white dark:bg-abyss-glow dark:text-abyss-bg hover:opacity-90 transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <span>📌</span>
+                                    <span>Fijar relato / dibujo manuscrito en «Lo que podemos ver»</span>
+                                </button>
+
+                                <!-- Galería de creaciones manuscritas de los asistentes -->
+                                <div id="fourthPersonGallery" class="mt-3.5 pt-3 border-t border-paper-border/70 dark:border-abyss-border/70 space-y-2.5">
+                                    ${renderFourthPersonGalleryHTML()}
+                                </div>
+
+                                <!-- Recuadro de Aportes y anotaciones del Simposio para los relatos/dibujos en 4.ª persona -->
+                                <div class="symposium-notes-box select-text mt-3.5 p-2.5 rounded-lg bg-paper-bg/85 dark:bg-abyss-bg/85 border border-dashed border-paper-crimson/40 dark:border-abyss-glow/40 cursor-default">
+                                    <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-paper-crimson dark:text-abyss-glow font-bold mb-1.5">
+                                        <span>💬 Aportes y anotaciones del Simposio</span>
+                                        <span data-comment-badge="fourthPersonCreationWindow">(${fourthPersonWindowComments.length})</span>
+                                    </div>
+
+                                    <div data-comments-for="fourthPersonCreationWindow" class="space-y-1.5 max-h-36 overflow-y-auto pr-0.5 mb-2">
+                                        ${renderFourthPersonWindowCommentsHTML()}
+                                    </div>
+
+                                    <form data-inline-comment-form="fourthPersonCreationWindow" onsubmit="submitFourthPersonWindowComment(event)" class="space-y-1.5">
+                                        <div class="flex gap-1.5">
+                                            <input type="text" name="author" autocomplete="name" value="${escapeHTML(rememberedSymposiumAuthor)}" placeholder="Nombre / Rol"
+                                                   class="select-text flex-1 min-w-0 px-2 py-1 text-[11px] rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                            <select name="category" aria-label="Tipo de aporte"
+                                                    class="px-1.5 py-1 text-[10px] font-mono rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                                <option value="Comentario">💬 Comentario</option>
+                                                <option value="Pregunta">❓ Pregunta</option>
+                                                <option value="Observación">👁️ Observación</option>
+                                                <option value="Retroalimentación">🔄 Retroalimentación</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex gap-1.5">
+                                            <input type="text" name="note" required autocomplete="off" placeholder="Comenta lo que escribieron o dibujaron los demás..."
+                                                   class="select-text flex-1 min-w-0 px-2 py-1 text-[11px] rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                            <button type="submit"
+                                                    class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg hover:opacity-90 transition-all shrink-0 cursor-pointer">
+                                                Guardar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </article>
+                        </div>
+                    `;
+                } else {
+                    // COLUMNAS 1, 2 Y 3 (4 ventanas cada una)
+                    colEl.className = 'w-[345px] sm:w-[375px] shrink-0 flex flex-col max-h-[calc(100vh-195px)] rounded-2xl bg-paper-card/65 dark:bg-abyss-card/65 border border-paper-border dark:border-abyss-border backdrop-blur-sm transition-colors duration-500';
+
+                    colEl.innerHTML = `
+                        <div class="p-4 border-b border-paper-border/80 dark:border-abyss-border/80">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-paper-ink/10 dark:bg-abyss-glow/15 text-paper-ink dark:text-abyss-glow">
+                                    COLUMNA ${col.number}
+                                </span>
+                                <span class="font-mono text-[11px] text-paper-muted dark:text-abyss-muted">
+                                    ${col.cards.length} ventanas
+                                </span>
+                            </div>
+                            <h2 class="font-serif text-base sm:text-lg font-bold leading-snug">
+                                ${col.title}
+                            </h2>
+                            <p class="tech-subtitle text-xs sm:text-[13px] font-bold mt-0.5">
+                                ${col.subtitle}
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 space-y-4 overflow-y-auto column-scroll flex-1">
+                            ${col.cards.map(card => renderCardHTML(col.id, card)).join('')}
+                        </div>
+
+                        <div class="p-3 border-t border-paper-border/70 dark:border-abyss-border/70">
+                            <button type="button" onclick="openAddModal('${col.id}')" 
+                                    class="w-full py-2 px-3 rounded-xl border border-dashed border-paper-muted/40 dark:border-abyss-muted/40 text-xs font-medium text-paper-muted dark:text-abyss-muted hover:text-paper-crimson dark:hover:text-abyss-glow hover:border-paper-crimson dark:hover:border-abyss-glow transition-all flex items-center justify-center gap-1.5">
+                                <span>+</span>
+                                <span>Añadir ventana en Columna ${col.number}</span>
+                            </button>
+                        </div>
+                    `;
+                }
+
+                container.appendChild(colEl);
+            });
+
+            // Inicializar el lienzo táctil si la Columna 4 está visible
+            if (document.getElementById('handCanvas')) {
+                initHandCanvas();
+            }
+
+            // Restaurar posiciones de desplazamiento del tablero y de cada columna
+            if (boardMain) {
+                boardMain.scrollLeft = prevBoardScrollLeft;
+            }
+            Object.keys(prevColScrolls).forEach(colElId => {
+                const el = document.getElementById(colElId);
+                const scrollArea = el ? el.querySelector('.column-scroll') : null;
+                if (scrollArea) {
+                    scrollArea.scrollTop = prevColScrolls[colElId];
+                }
+            });
+        }
+
+        // Bloqueo explícito de teclado en el lienzo de escritura manual (Columna 4)
+        function blockKeyboardInCreation(e) {
+            if (e.target && e.target.closest('.symposium-notes-box')) return;
+            if (e.key === 'Escape') return;
+            e.preventDefault();
+            e.stopPropagation();
+            showToast('Teclado deshabilitado en el lienzo de «Lo que podemos ver»: escribe o dibuja con tu dedo o mouse.');
+        }
+
+        function setFourthPersonAuthor(role) {
+            selectedFourthPersonAuthor = role;
+            document.querySelectorAll('.fp-role-btn').forEach(btn => {
+                if (btn.dataset.fprole === role) {
+                    btn.className = 'fp-role-btn px-2 py-0.5 rounded-md text-[10px] font-mono border transition-all bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg border-paper-ink dark:border-abyss-glow font-bold';
+                } else {
+                    btn.className = 'fp-role-btn px-2 py-0.5 rounded-md text-[10px] font-mono border transition-all bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-gray-300 border-paper-border dark:border-abyss-border';
+                }
+            });
+        }
+
+        // Renderizar galería de relatos/dibujos manuscritos en la Columna 4
+        function renderFourthPersonGalleryHTML() {
+            if (!manualCreations || manualCreations.length === 0) {
+                return `
+                    <p class="text-[11px] italic text-paper-muted dark:text-abyss-muted text-center py-1">
+                        Aún no hay trazos fijados. Sé el primero en escribir a mano o dibujar desde la 4.ª persona.
+                    </p>
+                `;
+            }
+
+            return `
+                <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-paper-crimson dark:text-abyss-glow font-bold">
+                    <span>🌿 Huellas en 4.ª Persona (${manualCreations.length})</span>
+                    <span>Archivo Táctil en Vivo</span>
+                </div>
+                <div class="space-y-2.5">
+                    ${manualCreations.slice().reverse().map((item) => `
+                        <div class="rounded-lg border border-paper-border dark:border-abyss-border bg-[#FCFBF7] p-2 shadow-sm">
+                            <div class="flex items-center justify-between gap-1 text-[10px] font-mono text-stone-600 mb-1">
+                                <span class="font-bold text-stone-900">✍️ ${escapeHTML(item.label)} ${item.author ? `• [${escapeHTML(item.author)}]` : ''}</span>
+                                <span>${escapeHTML(item.time)}</span>
+                            </div>
+                            <img src="${item.image}" alt="${escapeHTML(item.label)}" class="w-full h-auto rounded border border-stone-200 block">
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Inicializar lienzo de escritura manual bicolor (Columna 4)
+        function initHandCanvas() {
+            handCanvas = document.getElementById('handCanvas');
+            if (!handCanvas) return;
+            handCtx = handCanvas.getContext('2d');
+            hasDrawn = false;
+            resizeHandCanvas();
+
+            const getPos = (e) => {
+                const rect = handCanvas.getBoundingClientRect();
+                const clientX = e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches && e.touches.length ? e.touches[0].clientY : e.clientY;
+                const scaleX = rect.width > 0 ? handCanvas.width / rect.width : 1;
+                const scaleY = rect.height > 0 ? handCanvas.height / rect.height : 1;
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            };
+
+            const startDraw = (e) => {
+                if (e.button !== undefined && e.button !== 0) return;
+                if (handCanvas.width === 0 || handCanvas.height === 0) {
+                    resizeHandCanvas();
+                }
+                isDrawing = true;
+                hasDrawn = true;
+                const hint = document.getElementById('canvasHint');
+                if (hint) hint.classList.add('hidden');
+
+                if (e.pointerId !== undefined && handCanvas.setPointerCapture) {
+                    try { handCanvas.setPointerCapture(e.pointerId); } catch (err) {}
+                }
+
+                const pos = getPos(e);
+                handCtx.lineWidth = currentStrokeWidth;
+                handCtx.lineCap = 'round';
+                handCtx.lineJoin = 'round';
+                handCtx.strokeStyle = currentInk;
+                handCtx.fillStyle = currentInk;
+
+                handCtx.beginPath();
+                handCtx.arc(pos.x, pos.y, currentStrokeWidth / 2, 0, Math.PI * 2);
+                handCtx.fill();
+
+                handCtx.beginPath();
+                handCtx.moveTo(pos.x, pos.y);
+            };
+
+            const moveDraw = (e) => {
+                if (!isDrawing) return;
+                if (e.cancelable) e.preventDefault();
+                const pos = getPos(e);
+                handCtx.lineWidth = currentStrokeWidth;
+                handCtx.lineCap = 'round';
+                handCtx.lineJoin = 'round';
+                handCtx.strokeStyle = currentInk;
+                handCtx.lineTo(pos.x, pos.y);
+                handCtx.stroke();
+            };
+
+            const endDraw = (e) => {
+                if (!isDrawing) return;
+                isDrawing = false;
+                if (e && e.pointerId !== undefined && handCanvas.releasePointerCapture) {
+                    try { handCanvas.releasePointerCapture(e.pointerId); } catch (err) {}
+                }
+            };
+
+            if (window.PointerEvent) {
+                handCanvas.addEventListener('pointerdown', startDraw);
+                handCanvas.addEventListener('pointermove', moveDraw);
+                handCanvas.addEventListener('pointerup', endDraw);
+                handCanvas.addEventListener('pointercancel', endDraw);
+            } else {
+                handCanvas.addEventListener('mousedown', startDraw);
+                handCanvas.addEventListener('mousemove', moveDraw);
+                window.addEventListener('mouseup', endDraw);
+
+                handCanvas.addEventListener('touchstart', startDraw, { passive: true });
+                handCanvas.addEventListener('touchmove', moveDraw, { passive: false });
+                handCanvas.addEventListener('touchend', endDraw);
+            }
+        }
+
+        function resizeHandCanvas() {
+            if (!handCanvas || !handCtx) return;
+            const rect = handCanvas.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+            if (handCanvas.width === Math.round(rect.width) && handCanvas.height === Math.round(rect.height)) {
+                return;
+            }
+
+            let backup = null;
+            if (hasDrawn && handCanvas.width > 0 && handCanvas.height > 0) {
+                backup = document.createElement('canvas');
+                backup.width = handCanvas.width;
+                backup.height = handCanvas.height;
+                backup.getContext('2d').drawImage(handCanvas, 0, 0);
+            }
+
+            handCanvas.width = Math.round(rect.width);
+            handCanvas.height = Math.round(rect.height);
+            drawPaperLines();
+
+            if (backup) {
+                handCtx.drawImage(backup, 0, 0, handCanvas.width, handCanvas.height);
+            }
+        }
+
+        function drawPaperLines() {
+            if (!handCtx || !handCanvas) return;
+            handCtx.fillStyle = '#FCFBF7';
+            handCtx.fillRect(0, 0, handCanvas.width, handCanvas.height);
+            handCtx.strokeStyle = '#E5DEC9';
+            handCtx.lineWidth = 1;
+            for (let y = 28; y < handCanvas.height; y += 28) {
+                handCtx.beginPath();
+                handCtx.moveTo(0, y);
+                handCtx.lineTo(handCanvas.width, y);
+                handCtx.stroke();
+            }
+            handCtx.strokeStyle = 'rgba(185, 28, 28, 0.35)';
+            handCtx.beginPath();
+            handCtx.moveTo(34, 0);
+            handCtx.lineTo(34, handCanvas.height);
+            handCtx.stroke();
+        }
+
+        function setInkColor(color) {
+            currentInk = color;
+            const blackBtn = document.getElementById('inkBlackBtn');
+            const redBtn = document.getElementById('inkRedBtn');
+            if (blackBtn && redBtn) {
+                if (color === '#B91C1C') {
+                    redBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-mono border-2 border-paper-crimson bg-red-50 text-red-800 font-bold shadow-sm transition-all';
+                    blackBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-mono border border-paper-border dark:border-abyss-border bg-white text-stone-900 opacity-85 hover:opacity-100 transition-all';
+                } else {
+                    blackBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-mono border-2 border-paper-ink bg-white text-stone-900 font-bold shadow-sm transition-all';
+                    redBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-mono border border-paper-crimson/40 bg-red-50 text-red-800 opacity-85 hover:opacity-100 transition-all';
+                }
+            }
+        }
+
+        function setStrokeWidth(width) {
+            currentStrokeWidth = width;
+            const fineBtn = document.getElementById('strokeFineBtn');
+            const boldBtn = document.getElementById('strokeBoldBtn');
+            if (fineBtn && boldBtn) {
+                if (width > 3) {
+                    boldBtn.className = 'px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-ink/40 bg-paper-bg dark:bg-abyss-bg text-paper-ink dark:text-white font-bold';
+                    fineBtn.className = 'px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-border dark:border-abyss-border text-paper-muted dark:text-gray-300';
+                } else {
+                    fineBtn.className = 'px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-ink/40 bg-paper-bg dark:bg-abyss-bg text-paper-ink dark:text-white font-bold';
+                    boldBtn.className = 'px-2 py-1 rounded-lg text-[10px] font-mono border border-paper-border dark:border-abyss-border text-paper-muted dark:text-gray-300';
+                }
+            }
+        }
+
+        function clearHandCanvas() {
+            hasDrawn = false;
+            drawPaperLines();
+            const hint = document.getElementById('canvasHint');
+            if (hint) hint.classList.remove('hidden');
+        }
+
+        function stampFourthPersonCreation() {
+            if (!hasDrawn || !handCanvas) {
+                showToast('Escribe a mano o dibuja primero sobre el papel con tu dedo o mouse.');
+                return;
+            }
+            const dataUrl = handCanvas.toDataURL('image/png');
+            const now = new Date();
+            const time = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+            const index = manualCreations.length + 1;
+            const authorRole = rememberedSymposiumAuthor || selectedFourthPersonAuthor || 'Asistente Simposio';
+
+            manualCreations.push({
+                id: 'fp-' + Date.now(),
+                label: `Relato / Trazo en 4.ª Persona #${index}`,
+                author: authorRole,
+                time,
+                image: dataUrl
+            });
+
+            saveState();
+            clearHandCanvas();
+            const gallery = document.getElementById('fourthPersonGallery');
+            if (gallery) {
+                gallery.innerHTML = renderFourthPersonGalleryHTML();
+            }
+            renderPublicSymposiumSection();
+            showToast('¡Relato / dibujo en 4.ª persona fijado y publicado en «Lo que podemos ver»!');
+        }
+
+        function renderFourthPersonWindowCommentsHTML() {
+            if (!Array.isArray(fourthPersonWindowComments) || fourthPersonWindowComments.length === 0) {
+                return `
+                    <div class="text-[11px] italic text-paper-muted dark:text-gray-400">
+                        Sin anotaciones aún. Registra aquí comentarios, preguntas, observaciones o retroalimentaciones sobre los trazos en 4.ª persona:
+                    </div>
+                `;
+            }
+
+            return fourthPersonWindowComments.map((c, idx) => {
+                const norm = normalizeCommentEntry(c);
+                const catStyle = getCategoryBadgeStyle(norm.category);
+                return `
+                    <div class="flex items-start justify-between gap-1.5 bg-paper-card/80 dark:bg-abyss-card/80 px-2 py-1.5 rounded border border-paper-border/60 dark:border-abyss-border/60">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-1 mb-0.5">
+                                <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold border ${catStyle.cls}">
+                                    ${catStyle.icon} ${escapeHTML(norm.category)}
+                                </span>
+                                <strong class="font-mono text-[10px] text-paper-ink dark:text-gray-200">${escapeHTML(norm.author)}</strong>
+                                ${norm.time ? `<span class="font-mono text-[9px] text-paper-muted dark:text-gray-400">(${escapeHTML(norm.time)})</span>` : ''}
+                            </div>
+                            <div class="font-hand text-[15px] leading-snug text-paper-ink dark:text-amber-100 break-words">
+                                ✍️ ${escapeHTML(norm.text)}
+                            </div>
+                        </div>
+                        <button type="button" onclick="deleteFourthPersonWindowComment(${idx})" title="Eliminar anotación"
+                                class="text-[10px] font-mono text-paper-muted hover:text-paper-crimson dark:hover:text-red-400 px-1 shrink-0">
+                            ✕
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function submitFourthPersonWindowComment(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const form = e.target;
+            const noteInput = form.elements.note;
+            const authorInput = form.elements.author;
+            const categorySelect = form.elements.category;
+            const text = noteInput ? noteInput.value.trim() : '';
+            if (!text) {
+                showToast('Escribe un comentario, pregunta, observación o retroalimentación antes de guardar.');
+                if (noteInput) noteInput.focus();
+                return;
+            }
+
+            const rawAuthor = authorInput ? authorInput.value.trim() : '';
+            if (rawAuthor) {
+                rememberedSymposiumAuthor = rawAuthor;
+            }
+            const author = rawAuthor || selectedFourthPersonAuthor || 'Asistente Simposio';
+            const category = categorySelect ? categorySelect.value : 'Comentario';
+            const now = new Date();
+            const time = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+
+            fourthPersonWindowComments.push({ text, author, category, time });
+            saveState();
+
+            if (noteInput) noteInput.value = '';
+            const listEl = document.querySelector('[data-comments-for="fourthPersonCreationWindow"]');
+            if (listEl) {
+                listEl.innerHTML = renderFourthPersonWindowCommentsHTML();
+                listEl.scrollTop = listEl.scrollHeight;
+            }
+            const badgeEl = document.querySelector('[data-comment-badge="fourthPersonCreationWindow"]');
+            if (badgeEl) {
+                badgeEl.textContent = `(${fourthPersonWindowComments.length})`;
+            }
+            renderPublicSymposiumSection();
+            showToast(`${category} guardado y publicado en el muro del Simposio.`);
+        }
+
+        function deleteFourthPersonWindowComment(index) {
+            if (Array.isArray(fourthPersonWindowComments)) {
+                fourthPersonWindowComments.splice(index, 1);
+                saveState();
+                const listEl = document.querySelector('[data-comments-for="fourthPersonCreationWindow"]');
+                if (listEl) {
+                    listEl.innerHTML = renderFourthPersonWindowCommentsHTML();
+                }
+                const badgeEl = document.querySelector('[data-comment-badge="fourthPersonCreationWindow"]');
+                if (badgeEl) {
+                    badgeEl.textContent = `(${fourthPersonWindowComments.length})`;
+                }
+                renderPublicSymposiumSection();
+                showToast('Anotación eliminada del muro.');
+            }
+        }
+
+        // Obtener lista unificada de enlaces externos de una ventana
+        function getCardLinks(card) {
+            const links = [];
+            if (card.linkBox) links.push(card.linkBox);
+            if (Array.isArray(card.linkBoxes)) links.push(...card.linkBoxes);
+            return links;
+        }
+
+        function normalizeCommentEntry(c) {
+            if (typeof c === 'string') {
+                return {
+                    text: c,
+                    author: 'Registro Simposio',
+                    category: 'Comentario',
+                    time: ''
+                };
+            }
+            return {
+                text: c && c.text ? c.text : '',
+                author: c && c.author ? c.author : 'Participante Simposio',
+                category: c && c.category ? c.category : 'Comentario',
+                time: c && c.time ? c.time : ''
+            };
+        }
+
+        function getCategoryBadgeStyle(category) {
+            switch (category) {
+                case 'Pregunta':
+                    return { icon: '❓', cls: 'bg-sky-500/15 text-sky-800 dark:text-sky-300 border-sky-500/30' };
+                case 'Observación':
+                    return { icon: '👁️', cls: 'bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30' };
+                case 'Retroalimentación':
+                    return { icon: '🔄', cls: 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/30' };
+                case 'Comentario':
+                default:
+                    return { icon: '💬', cls: 'bg-rose-500/15 text-rose-800 dark:text-rose-300 border-rose-500/30' };
+            }
+        }
+
+        // Generar el listado HTML de comentarios de cada ventana
+        function renderInlineCommentsListHTML(colId, card) {
+            const comments = Array.isArray(card.comments) ? card.comments : [];
+            if (comments.length === 0) {
+                return `
+                    <div class="text-[11px] italic text-paper-muted dark:text-gray-400">
+                        Sin anotaciones aún. Registra aquí tu comentario, pregunta, observación o retroalimentación para guardarlo en el muro:
+                    </div>
+                `;
+            }
+
+            return comments.map((c, idx) => {
+                const norm = normalizeCommentEntry(c);
+                const catStyle = getCategoryBadgeStyle(norm.category);
+                return `
+                    <div class="flex items-start justify-between gap-1.5 bg-paper-card/80 dark:bg-abyss-card/80 px-2 py-1.5 rounded border border-paper-border/60 dark:border-abyss-border/60">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-1 mb-0.5">
+                                <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold border ${catStyle.cls}">
+                                    ${catStyle.icon} ${escapeHTML(norm.category)}
+                                </span>
+                                <strong class="font-mono text-[10px] text-paper-ink dark:text-gray-200">${escapeHTML(norm.author)}</strong>
+                                ${norm.time ? `<span class="font-mono text-[9px] text-paper-muted dark:text-gray-400">(${escapeHTML(norm.time)})</span>` : ''}
+                            </div>
+                            <div class="font-hand text-[15px] leading-snug text-paper-ink dark:text-amber-100 break-words">
+                                ✍️ ${escapeHTML(norm.text)}
+                            </div>
+                        </div>
+                        <button type="button" onclick="event.stopPropagation(); deleteCardComment('${colId}', '${card.id}', ${idx})" title="Eliminar anotación"
+                                class="text-[10px] font-mono text-paper-muted hover:text-paper-crimson dark:hover:text-red-400 px-1 shrink-0">
+                            ✕
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Actualizar en vivo el recuadro de comentarios de una ventana sin recargar videos ni perder el scroll
+        function refreshCardCommentsUI(colId, cardId) {
+            const col = columnsData.find(c => c.id === colId);
+            const card = col?.cards.find(k => k.id === cardId);
+            if (!card) return;
+
+            const count = Array.isArray(card.comments) ? card.comments.length : 0;
+            const listEl = document.querySelector(`[data-comments-for="${cardId}"]`);
+            if (listEl) {
+                listEl.innerHTML = renderInlineCommentsListHTML(colId, card);
+                listEl.scrollTop = listEl.scrollHeight;
+            }
+
+            const badgeEl = document.querySelector(`[data-comment-badge="${cardId}"]`);
+            if (badgeEl) {
+                badgeEl.textContent = `(${count})`;
+            }
+
+            const footerCountEl = document.querySelector(`[data-footer-comment-count="${cardId}"]`);
+            if (footerCountEl) {
+                footerCountEl.textContent = `💬 ${count}`;
+            }
+
+            if (rememberedSymposiumAuthor) {
+                document.querySelectorAll('form[data-inline-comment-form] input[name="author"]').forEach(inp => {
+                    if (!inp.value.trim()) {
+                        inp.value = rememberedSymposiumAuthor;
+                    }
+                });
+            }
+
+            renderPublicSymposiumSection();
+        }
+
+        function handleCardArticleClick(e, colId, cardId) {
+            if (e.target && e.target.closest('.symposium-notes-box, form, input, textarea, select, button, a, iframe')) {
+                return;
+            }
+            openCardDetail(colId, cardId);
+        }
+
+        // Generar HTML de cada tarjeta/ventana en las Columnas 1, 2, 3 y 4
+        function renderCardHTML(colId, card) {
+            const badgeColors = {
+                teoria: 'bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30',
+                educacion: 'bg-rose-500/15 text-rose-800 dark:text-rose-300 border-rose-500/30',
+                caso: 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/30'
+            };
+
+            const badgeClass = badgeColors[card.type] || badgeColors.teoria;
+
+            return `
+                <article id="card-${card.id}" onclick="handleCardArticleClick(event, '${colId}', '${card.id}')" 
+                         class="tactile-card relative cursor-pointer rounded-xl bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border p-4 select-none">
+                    <div class="tape-strip"></div>
+                    
+                    <div class="flex items-center justify-between gap-2 mb-2 mt-1">
+                        <span class="text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded-md border ${badgeClass}">
+                            ${card.badge}
+                        </span>
+                    </div>
+
+                    <h3 class="font-serif text-[15px] sm:text-[16.5px] font-bold leading-snug mb-2">
+                        ${card.title}
+                    </h3>
+
+                    ${card.svgType ? `
+                        <div class="mb-2.5 rounded-lg overflow-hidden border border-paper-border dark:border-abyss-border">
+                            ${getCardSVG(card.svgType)}
+                        </div>
+                    ` : ''}
+
+                    ${card.imageUrl ? `
+                        <figure class="mb-2.5 rounded-lg overflow-hidden border border-paper-border dark:border-abyss-border bg-paper-bg dark:bg-abyss-bg shadow-sm">
+                            <img src="${card.imageUrl}"
+                                 alt="${escapeHTML(card.title)}"
+                                 loading="lazy"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F0E6/1C1917?text=${encodeURIComponent(card.title)}';"
+                                 class="w-full h-auto object-cover block">
+                            ${card.imageCaption ? `
+                                <figcaption class="px-2.5 py-1 text-[10px] font-mono text-paper-muted dark:text-gray-300 border-t border-paper-border/70 dark:border-abyss-border/70">
+                                    🖼️ ${escapeHTML(card.imageCaption)}
+                                </figcaption>
+                            ` : ''}
+                        </figure>
+                    ` : ''}
+
+                    ${card.secondaryImageUrl ? `
+                        <figure class="mb-2.5 rounded-lg overflow-hidden border border-paper-border dark:border-abyss-border bg-paper-bg dark:bg-abyss-bg shadow-sm">
+                            <img src="${card.secondaryImageUrl}"
+                                 alt="${escapeHTML(card.title)}"
+                                 loading="lazy"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F0E6/1C1917?text=${encodeURIComponent(card.title)}';"
+                                 class="w-full h-auto object-cover block">
+                        </figure>
+                    ` : ''}
+
+                    ${card.videoUrl ? `
+                        <div onclick="event.stopPropagation()" class="mb-2.5 rounded-lg overflow-hidden border border-paper-border dark:border-abyss-border bg-black shadow-sm">
+                            <div class="aspect-video w-full">
+                                <iframe src="${card.videoUrl}"
+                                        title="${escapeHTML(card.title)}"
+                                        class="w-full h-full border-0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen></iframe>
+                            </div>
+                            ${card.videoWatchUrl ? `
+                                <div class="px-2.5 py-1 bg-paper-bg/95 dark:bg-abyss-bg/95 border-t border-paper-border/70 dark:border-abyss-border/70 flex items-center justify-between text-[10px] font-mono">
+                                    <span class="text-paper-crimson dark:text-abyss-glow font-bold">▶ Video de análisis</span>
+                                    <a href="${card.videoWatchUrl}" target="_blank" rel="noopener noreferrer" class="underline text-paper-muted dark:text-gray-300 hover:text-paper-crimson dark:hover:text-abyss-glow">
+                                        Abrir en YouTube ↗
+                                    </a>
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+
+                    <p class="tech-paragraph text-[13px] leading-relaxed whitespace-pre-line mb-3">
+                        ${card.summary}
+                    </p>
+
+                    ${card.quote ? `
+                        <blockquote class="p-2.5 rounded-lg bg-paper-bg/90 dark:bg-abyss-bg/90 border-l-2 border-paper-crimson dark:border-abyss-glow text-[11px] italic text-paper-ink/90 dark:text-gray-300 mb-3">
+                            ${card.quote}
+                        </blockquote>
+                    ` : ''}
+
+                    ${getCardLinks(card).length > 0 ? `
+                        <div class="space-y-2 mb-3">
+                            ${getCardLinks(card).map(link => `
+                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+                                   class="group block p-3 rounded-xl border-2 border-emerald-700/35 dark:border-abyss-cyan/45 bg-emerald-500/10 dark:bg-abyss-cyan/10 hover:border-paper-crimson dark:hover:border-abyss-glow transition-all shadow-sm">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-900 dark:text-abyss-cyan">
+                                            🔗 ${escapeHTML(link.label)}
+                                        </span>
+                                        <span class="font-mono text-xs font-bold text-paper-crimson dark:text-abyss-glow group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                                            ↗
+                                        </span>
+                                    </div>
+                                    <div class="font-serif text-xs font-bold text-paper-ink dark:text-white leading-snug">
+                                        ${escapeHTML(link.title)}
+                                    </div>
+                                    <div class="font-mono text-[11px] underline break-all text-emerald-800 dark:text-sky-300 mt-1">
+                                        ${escapeHTML(link.url)}
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
+                    <!-- Recuadro funcional directo en cada ventana: Aportes y anotaciones del Simposio -->
+                    <div onclick="event.stopPropagation()"
+                         onmousedown="event.stopPropagation()"
+                         onpointerdown="event.stopPropagation()"
+                         ontouchstart="event.stopPropagation()"
+                         class="symposium-notes-box select-text mb-3 p-2.5 rounded-lg bg-paper-bg/85 dark:bg-abyss-bg/85 border border-dashed border-paper-crimson/40 dark:border-abyss-glow/40 cursor-default">
+                        <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-paper-crimson dark:text-abyss-glow font-bold mb-1.5">
+                            <span>💬 Aportes y anotaciones del Simposio</span>
+                            <span data-comment-badge="${card.id}">(${(card.comments || []).length})</span>
+                        </div>
+
+                        <div data-comments-for="${card.id}" class="space-y-1.5 max-h-36 overflow-y-auto pr-0.5 mb-2">
+                            ${renderInlineCommentsListHTML(colId, card)}
+                        </div>
+
+                        <form data-inline-comment-form="${card.id}" onsubmit="submitInlineComment(event, '${colId}', '${card.id}')" class="space-y-1.5">
+                            <div class="flex gap-1.5">
+                                <input type="text" name="author" autocomplete="name" value="${escapeHTML(rememberedSymposiumAuthor)}" placeholder="Nombre / Rol"
+                                       class="select-text flex-1 min-w-0 px-2 py-1 text-[11px] rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                <select name="category" aria-label="Tipo de aporte"
+                                        class="px-1.5 py-1 text-[10px] font-mono rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                    <option value="Comentario">💬 Comentario</option>
+                                    <option value="Pregunta">❓ Pregunta</option>
+                                    <option value="Observación">👁️ Observación</option>
+                                    <option value="Retroalimentación">🔄 Retroalimentación</option>
+                                </select>
+                            </div>
+                            <div class="flex gap-1.5">
+                                <input type="text" name="note" required autocomplete="off" placeholder="Escribe comentario, pregunta, observación o retroalimentación..."
+                                       class="select-text flex-1 min-w-0 px-2 py-1 text-[11px] rounded-md bg-paper-card dark:bg-abyss-card border border-paper-border dark:border-abyss-border text-paper-ink dark:text-white placeholder:text-paper-muted/70 dark:placeholder:text-gray-400 focus:outline-none focus:border-paper-crimson dark:focus:border-abyss-glow">
+                                <button type="submit"
+                                        class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg hover:opacity-90 transition-all shrink-0 cursor-pointer">
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2 border-t border-paper-border/60 dark:border-abyss-border/60 text-[11px] text-paper-muted dark:text-abyss-muted">
+                        <button type="button" onclick="event.stopPropagation(); toggleLike('${colId}', '${card.id}')" 
+                                class="flex items-center gap-1 hover:text-paper-crimson dark:hover:text-abyss-glow transition-colors font-mono">
+                            <span>♥</span>
+                            <span>${card.likes || 0}</span>
+                        </button>
+                        <div class="flex items-center gap-2 font-mono">
+                            <span data-footer-comment-count="${card.id}">💬 ${(card.comments || []).length}</span>
+                            <span class="text-paper-crimson dark:text-abyss-glow font-sans font-medium">Anotar / Ampliar →</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function toggleLike(colId, cardId) {
+            const col = columnsData.find(c => c.id === colId);
+            if (!col) return;
+            const card = col.cards.find(k => k.id === cardId);
+            if (!card) return;
+            card.likes = (card.likes || 0) + 1;
+            saveState();
+            renderBoard();
+        }
+
+        // Abrir detalle completo de una tarjeta
+        function openCardDetail(colId, cardId) {
+            const col = columnsData.find(c => c.id === colId);
+            const card = col?.cards.find(k => k.id === cardId);
+            if (!card) return;
+
+            activeCardRef = { colId, cardId };
+
+            document.getElementById('modalTag').textContent = `${col.title} • ${card.badge}`;
+            document.getElementById('modalTag').className = 'inline-block font-mono text-[11px] uppercase px-2.5 py-1 rounded-full mb-2 bg-paper-crimson/10 text-paper-crimson dark:bg-abyss-glow/15 dark:text-abyss-glow font-semibold';
+            document.getElementById('modalTitle').textContent = card.title;
+
+            const visualBox = document.getElementById('modalVisualContainer');
+            let visualHTML = '';
+            if (card.svgType) {
+                visualHTML += getCardSVG(card.svgType);
+            }
+            if (card.imageUrl) {
+                visualHTML += `
+                    <figure class="${card.svgType ? 'border-t border-paper-border dark:border-abyss-border' : ''} bg-paper-bg dark:bg-abyss-bg">
+                        <img src="${card.imageUrl}"
+                             alt="${escapeHTML(card.title)}"
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x520/F4F0E6/1C1917?text=${encodeURIComponent(card.title)}';"
+                             class="w-full max-h-[380px] object-contain mx-auto block">
+                        ${card.imageCaption ? `
+                            <figcaption class="px-3 py-1.5 text-[11px] font-mono text-paper-muted dark:text-gray-300 border-t border-paper-border/70 dark:border-abyss-border/70">
+                                🖼️ ${escapeHTML(card.imageCaption)}
+                            </figcaption>
+                        ` : ''}
+                    </figure>
+                `;
+            }
+            if (card.secondaryImageUrl) {
+                visualHTML += `
+                    <figure class="${(card.svgType || card.imageUrl) ? 'border-t border-paper-border dark:border-abyss-border' : ''} bg-paper-bg dark:bg-abyss-bg">
+                        <img src="${card.secondaryImageUrl}"
+                             alt="${escapeHTML(card.title)}"
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x520/F4F0E6/1C1917?text=${encodeURIComponent(card.title)}';"
+                             class="w-full max-h-[380px] object-contain mx-auto block">
+                    </figure>
+                `;
+            }
+            if (card.videoUrl) {
+                visualHTML += `
+                    <div class="${card.svgType ? 'border-t border-paper-border dark:border-abyss-border' : ''} bg-black">
+                        <div class="aspect-video w-full">
+                            <iframe src="${card.videoUrl}"
+                                    title="${escapeHTML(card.title)}"
+                                    class="w-full h-full border-0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+            }
+            if (visualHTML) {
+                visualBox.innerHTML = visualHTML;
+                visualBox.classList.remove('hidden');
+            } else {
+                visualBox.innerHTML = '';
+                visualBox.classList.add('hidden');
+            }
+
+            let bodyHTML = `<p class="whitespace-pre-line">${card.summary}</p>`;
+            if (card.secondaryNote) {
+                bodyHTML += `<p class="text-xs text-paper-muted dark:text-abyss-muted bg-paper-bg dark:bg-abyss-bg p-3 rounded-lg border border-paper-border dark:border-abyss-border"><strong>Articulación teórica y documental:</strong> ${card.secondaryNote}</p>`;
+            }
+            const cardLinks = getCardLinks(card);
+            if (cardLinks.length > 0) {
+                bodyHTML += `
+                    <div class="space-y-2.5">
+                        ${cardLinks.map(link => `
+                            <a href="${link.url}" target="_blank" rel="noopener noreferrer"
+                               class="block p-3.5 rounded-xl border-2 border-emerald-700/35 dark:border-abyss-cyan/45 bg-emerald-500/10 dark:bg-abyss-cyan/10 hover:border-paper-crimson dark:hover:border-abyss-glow transition-all">
+                                <span class="block font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-900 dark:text-abyss-cyan mb-0.5">
+                                    🔗 ${escapeHTML(link.label)}
+                                </span>
+                                <span class="block font-serif text-sm font-bold text-paper-ink dark:text-white">
+                                    ${escapeHTML(link.title)}
+                                </span>
+                                <span class="block font-mono text-xs underline break-all text-emerald-800 dark:text-sky-300 mt-1">
+                                    ${escapeHTML(link.url)} ↗
+                                </span>
+                            </a>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            document.getElementById('modalBody').innerHTML = bodyHTML;
+
+            const quoteBox = document.getElementById('modalQuoteBox');
+            if (card.quote) {
+                quoteBox.textContent = card.quote;
+                quoteBox.classList.remove('hidden');
+            } else {
+                quoteBox.classList.add('hidden');
+            }
+
+            renderModalComments(card);
+            const modalAuthorInput = document.getElementById('commentAuthorInput');
+            if (modalAuthorInput && !modalAuthorInput.value.trim() && rememberedSymposiumAuthor) {
+                modalAuthorInput.value = rememberedSymposiumAuthor;
+            }
+            document.getElementById('detailModal').classList.remove('hidden');
+            document.getElementById('detailModal').classList.add('flex');
+        }
+
+        function renderModalComments(card) {
+            const list = document.getElementById('modalCommentsList');
+            const comments = card.comments || [];
+            document.getElementById('commentCount').textContent = comments.length;
+
+            if (comments.length === 0) {
+                list.innerHTML = `<p class="text-xs italic text-paper-muted dark:text-abyss-muted">Aún no hay notas del jurado o asistentes en esta ventana. Escribe abajo para fijar tu aporte en el muro.</p>`;
+            } else {
+                list.innerHTML = comments.map((c, idx) => {
+                    const norm = normalizeCommentEntry(c);
+                    const catStyle = getCategoryBadgeStyle(norm.category);
+                    const time = norm.time || 'Registro base';
+                    return `
+                        <div class="p-2.5 rounded-lg bg-paper-bg dark:bg-abyss-bg border border-paper-border dark:border-abyss-border flex items-start justify-between gap-2">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-paper-muted dark:text-abyss-muted mb-0.5">
+                                    <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold border ${catStyle.cls}">
+                                        ${catStyle.icon} ${escapeHTML(norm.category)}
+                                    </span>
+                                    <span class="font-bold text-paper-crimson dark:text-abyss-glow">${escapeHTML(norm.author)}</span>
+                                    <span>•</span>
+                                    <span>${escapeHTML(time)}</span>
+                                </div>
+                                <div class="font-hand text-base leading-snug text-paper-ink dark:text-amber-100 break-words">
+                                    ✍️ ${escapeHTML(norm.text)}
+                                </div>
+                            </div>
+                            <button type="button" onclick="deleteComment(${idx})" title="Eliminar anotación"
+                                    class="text-[11px] font-mono px-1.5 py-0.5 rounded text-paper-muted hover:text-paper-crimson dark:hover:text-red-400 transition-colors shrink-0">
+                                ✕
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function submitComment(e) {
+            e.preventDefault();
+            if (!activeCardRef) return;
+            const input = document.getElementById('commentInput');
+            const authorInput = document.getElementById('commentAuthorInput');
+            const categoryInput = document.getElementById('commentCategoryInput');
+            const text = input.value.trim();
+            if (!text) {
+                showToast('Escribe un comentario, pregunta, observación o retroalimentación antes de guardar.');
+                input.focus();
+                return;
+            }
+
+            const rawAuthor = authorInput ? authorInput.value.trim() : '';
+            if (rawAuthor) {
+                rememberedSymposiumAuthor = rawAuthor;
+            }
+            const author = rawAuthor || 'Asistente Simposio';
+            const category = categoryInput ? categoryInput.value : 'Comentario';
+            const now = new Date();
+            const time = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+
+            const col = columnsData.find(c => c.id === activeCardRef.colId);
+            const card = col?.cards.find(k => k.id === activeCardRef.cardId);
+            if (card) {
+                card.comments = card.comments || [];
+                card.comments.push({ text, author, category, time });
+                saveState();
+                renderModalComments(card);
+                refreshCardCommentsUI(activeCardRef.colId, activeCardRef.cardId);
+                input.value = '';
+                showToast(`${category} guardado y publicado en el muro del Simposio.`);
+            }
+        }
+
+        function submitInlineComment(e, colId, cardId) {
+            e.preventDefault();
+            e.stopPropagation();
+            const form = e.target;
+            const noteInput = form.elements.note;
+            const authorInput = form.elements.author;
+            const categorySelect = form.elements.category;
+            const text = noteInput ? noteInput.value.trim() : '';
+            if (!text) {
+                showToast('Escribe un comentario, pregunta, observación o retroalimentación antes de guardar.');
+                if (noteInput) noteInput.focus();
+                return;
+            }
+
+            const rawAuthor = authorInput ? authorInput.value.trim() : '';
+            if (rawAuthor) {
+                rememberedSymposiumAuthor = rawAuthor;
+            }
+            const author = rawAuthor || 'Asistente Simposio';
+            const category = categorySelect ? categorySelect.value : 'Comentario';
+            const now = new Date();
+            const time = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+
+            const col = columnsData.find(c => c.id === colId);
+            const card = col?.cards.find(k => k.id === cardId);
+            if (card) {
+                card.comments = card.comments || [];
+                card.comments.push({ text, author, category, time });
+                saveState();
+                if (noteInput) {
+                    noteInput.value = '';
+                }
+                if (activeCardRef && activeCardRef.colId === colId && activeCardRef.cardId === cardId) {
+                    renderModalComments(card);
+                }
+                refreshCardCommentsUI(colId, cardId);
+                showToast(`${category} guardado y publicado en el muro del Simposio.`);
+            }
+        }
+
+        // SECCIÓN PÚBLICA AL FINAL DE LA PÁGINA: VISUALIZACIÓN DE TODOS LOS APORTES Y CREACIONES EN 4.ª PERSONA
+        function setPublicFeedFilter(filterKey) {
+            currentPublicFilter = filterKey;
+            document.querySelectorAll('.pub-filter-btn').forEach(btn => {
+                if (btn.dataset.pubfilter === filterKey) {
+                    btn.className = 'pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono font-bold bg-paper-ink text-white dark:bg-abyss-glow dark:text-abyss-bg transition-all';
+                } else {
+                    btn.className = 'pub-filter-btn px-2.5 py-1.5 rounded-lg font-mono bg-paper-bg dark:bg-abyss-bg text-paper-muted dark:text-abyss-muted border border-paper-border dark:border-abyss-border transition-all';
+                }
+            });
+            renderPublicSymposiumSection();
+        }
+
+        function jumpToWindow(colId, cardId) {
+            if (currentColFilter !== 'all' && currentColFilter !== colId) {
+                filterColumns('all');
+            }
+            setTimeout(() => {
+                const colEl = document.getElementById(`column-${colId}`);
+                const boardMain = document.getElementById('padletBoardMain');
+                if (colEl && boardMain) {
+                    boardMain.scrollTo({
+                        left: colEl.offsetLeft - 24,
+                        behavior: 'smooth'
+                    });
+                }
+                const targetEl = cardId === 'fourthPersonCreationWindow'
+                    ? document.getElementById('fourthPersonCreationWindow')
+                    : document.getElementById(`card-${cardId}`);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetEl.classList.add('ring-2', 'ring-paper-crimson', 'dark:ring-abyss-glow');
+                    setTimeout(() => {
+                        targetEl.classList.remove('ring-2', 'ring-paper-crimson', 'dark:ring-abyss-glow');
+                    }, 2200);
+                }
+            }, 60);
+        }
+
+        function renderPublicSymposiumSection() {
+            const feedContainer = document.getElementById('publicSymposiumFeed');
+            const statsEl = document.getElementById('publicTotalStats');
+            if (!feedContainer) return;
+
+            const allPublicNotes = [];
+            columnsData.forEach(col => {
+                (col.cards || []).forEach(card => {
+                    (card.comments || []).forEach((c, idx) => {
+                        const norm = normalizeCommentEntry(c);
+                        allPublicNotes.push({
+                            colId: col.id,
+                            colNumber: col.number,
+                            colTitle: col.title,
+                            cardId: card.id,
+                            cardTitle: card.title,
+                            index: idx,
+                            ...norm
+                        });
+                    });
+                });
+            });
+
+            (fourthPersonWindowComments || []).forEach((c, idx) => {
+                const norm = normalizeCommentEntry(c);
+                allPublicNotes.push({
+                    colId: 'col4',
+                    colNumber: '04',
+                    colTitle: 'Lo que podemos ver',
+                    cardId: 'fourthPersonCreationWindow',
+                    cardTitle: 'Escritura manual y dibujo en «Cuarta Persona»',
+                    index: idx,
+                    ...norm
+                });
+            });
+
+            const drawingsList = Array.isArray(manualCreations) ? manualCreations : [];
+            if (statsEl) {
+                statsEl.textContent = `${allPublicNotes.length} aportes escritos públicos • ${drawingsList.length} escritos/dibujos en 4.ª persona`;
+            }
+
+            const filteredNotes = allPublicNotes.filter(item => {
+                if (currentPublicFilter === 'all') return true;
+                if (currentPublicFilter === 'Creaciones4P') return false;
+                return item.category === currentPublicFilter;
+            });
+
+            const showNotesBlock = currentPublicFilter !== 'Creaciones4P';
+            const showDrawingsBlock = currentPublicFilter === 'all' || currentPublicFilter === 'Creaciones4P';
+
+            let html = '';
+
+            if (showNotesBlock) {
+                html += `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-serif text-base font-bold">
+                                🗣️ Aportes, preguntas, observaciones y retroalimentaciones públicas (${filteredNotes.length})
+                            </h3>
+                        </div>
+                        ${filteredNotes.length === 0 ? `
+                            <div class="p-4 rounded-xl bg-paper-bg/80 dark:bg-abyss-bg/80 border border-dashed border-paper-border dark:border-abyss-border text-xs italic text-paper-muted dark:text-abyss-muted text-center">
+                                Aún no hay registros públicos en esta categoría. Participa en cualquiera de los recuadros «Aportes y anotaciones del Simposio» de las 4 columnas.
+                            </div>
+                        ` : `
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
+                                ${filteredNotes.slice().reverse().map(note => {
+                                    const catStyle = getCategoryBadgeStyle(note.category);
+                                    return `
+                                        <div class="rounded-xl bg-paper-bg/90 dark:bg-abyss-bg/90 border border-paper-border dark:border-abyss-border p-3.5 flex flex-col justify-between gap-2.5 shadow-sm">
+                                            <div>
+                                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${catStyle.cls}">
+                                                        ${catStyle.icon} ${escapeHTML(note.category)}
+                                                    </span>
+                                                    <span class="font-mono text-[10px] text-paper-muted dark:text-gray-400">
+                                                        Col. ${escapeHTML(note.colNumber)} ${note.time ? `• ${escapeHTML(note.time)}` : ''}
+                                                    </span>
+                                                </div>
+                                                <div class="font-mono text-[11px] font-bold text-paper-crimson dark:text-abyss-glow mb-1">
+                                                    👤 ${escapeHTML(note.author)}
+                                                </div>
+                                                <p class="font-hand text-lg leading-snug text-paper-ink dark:text-amber-100 break-words">
+                                                    «${escapeHTML(note.text)}»
+                                                </p>
+                                            </div>
+                                            <div class="pt-2 border-t border-paper-border/60 dark:border-abyss-border/60 flex items-center justify-between gap-2 text-[10px] font-mono">
+                                                <span class="truncate text-paper-muted dark:text-gray-300" title="${escapeHTML(note.cardTitle)}">
+                                                    📌 ${escapeHTML(note.cardTitle)}
+                                                </span>
+                                                <button type="button" onclick="jumpToWindow('${note.colId}', '${note.cardId}')"
+                                                        class="shrink-0 underline font-bold text-paper-crimson dark:text-abyss-glow hover:opacity-80">
+                                                    Ir a ventana ↗
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `}
+                    </div>
+                `;
+            }
+
+            if (showDrawingsBlock) {
+                html += `
+                    <div class="${showNotesBlock ? 'pt-4 border-t border-paper-border/70 dark:border-abyss-border/70' : ''}">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-serif text-base font-bold">
+                                ✍️ Galería pública de relatos manuscritos y dibujos en «Cuarta Persona» (${drawingsList.length})
+                            </h3>
+                            <button type="button" onclick="scrollToFourthColumn()"
+                                    class="text-xs font-mono underline font-bold text-paper-crimson dark:text-abyss-glow hover:opacity-80">
+                                + Trazar en Columna 4 ↗
+                            </button>
+                        </div>
+                        ${drawingsList.length === 0 ? `
+                            <div class="p-4 rounded-xl bg-paper-bg/80 dark:bg-abyss-bg/80 border border-dashed border-paper-border dark:border-abyss-border text-xs italic text-paper-muted dark:text-abyss-muted text-center">
+                                Aún no se han fijado escritos manuscritos ni dibujos en la Columna 4. Cuando los participantes tracen en «Lo que podemos ver», aparecerán aquí públicamente.
+                            </div>
+                        ` : `
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                ${drawingsList.slice().reverse().map(item => `
+                                    <div class="rounded-xl border border-paper-border dark:border-abyss-border bg-[#FCFBF7] p-2.5 shadow-sm">
+                                        <div class="flex items-center justify-between gap-1 text-[10px] font-mono text-stone-700 mb-1.5">
+                                            <span class="font-bold text-stone-900">✍️ ${escapeHTML(item.label)}</span>
+                                            <span>${escapeHTML(item.time)}</span>
+                                        </div>
+                                        <div class="text-[10px] font-mono text-rose-800 font-bold mb-1.5">
+                                            👤 ${escapeHTML(item.author || 'Participante Simposio')}
+                                        </div>
+                                        <img src="${item.image}" alt="${escapeHTML(item.label)}" class="w-full h-auto rounded-lg border border-stone-200 block">
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `}
+                    </div>
+                `;
+            }
+
+            feedContainer.innerHTML = html;
+        }
+
+        function deleteCardComment(colId, cardId, index) {
+            const col = columnsData.find(c => c.id === colId);
+            const card = col?.cards.find(k => k.id === cardId);
+            if (card && Array.isArray(card.comments)) {
+                card.comments.splice(index, 1);
+                saveState();
+                if (activeCardRef && activeCardRef.colId === colId && activeCardRef.cardId === cardId) {
+                    renderModalComments(card);
+                }
+                refreshCardCommentsUI(colId, cardId);
+                showToast('Anotación eliminada del muro.');
+            }
+        }
+
+        function deleteComment(index) {
+            if (!activeCardRef) return;
+            deleteCardComment(activeCardRef.colId, activeCardRef.cardId, index);
+        }
+
+        // Modal Añadir Nueva Tarjeta
+        function openAddModal(preselectedColId = 'col1') {
+            document.getElementById('newCardCol').value = preselectedColId;
+            document.getElementById('addModal').classList.remove('hidden');
+            document.getElementById('addModal').classList.add('flex');
+        }
+
+        function handleAddCard(e) {
+            e.preventDefault();
+            const colId = document.getElementById('newCardCol').value;
+            const type = document.getElementById('newCardType').value;
+            const title = document.getElementById('newCardTitle').value.trim();
+            const summary = document.getElementById('newCardDesc').value.trim();
+            const quote = document.getElementById('newCardQuote').value.trim();
+
+            const badgeMap = {
+                teoria: '📖 Categoría y Cita Teórica',
+                educacion: '🎓 Reflexión Educativa Colombia',
+                caso: '🌍 Ejemplo Internacional / Local'
+            };
+
+            const col = columnsData.find(c => c.id === colId);
+            if (col) {
+                col.cards.push({
+                    id: 'custom-' + Date.now(),
+                    type,
+                    badge: badgeMap[type] || badgeMap.teoria,
+                    title,
+                    summary,
+                    quote: quote ? (quote.startsWith('«') ? quote : `«${quote}»`) : '',
+                    likes: 1,
+                    comments: []
+                });
+                saveState();
+                renderBoard();
+                closeModal('addModal');
+                e.target.reset();
+                showToast('Nueva ventana publicada en el muro Padlet.');
+            }
+        }
+
+        function openBiblioModal() {
+            document.getElementById('biblioModal').classList.remove('hidden');
+            document.getElementById('biblioModal').classList.add('flex');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.remove('hidden');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3400);
+        }
+
+        // Inicializar aplicación
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
